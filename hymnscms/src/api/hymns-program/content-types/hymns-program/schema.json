@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hymns_programs",
+  "info": {
+    "singularName": "hymns-program",
+    "pluralName": "hymns-programs",
+    "displayName": "hymnsProgram"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "string"
+    },
+    "firstHymn": {
+      "type": "string"
+    },
+    "secondHymn": {
+      "type": "string"
+    },
+    "thirdHymn": {
+      "type": "string"
+    },
+    "fourthHymn": {
+      "type": "string"
+    },
+    "fifthHymn": {
+      "type": "string"
+    },
+    "sixthHymn": {
+      "type": "string"
+    },
+    "seventhHymn": {
+      "type": "string"
+    }
+  }
+}
