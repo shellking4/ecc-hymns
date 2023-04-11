@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "yoruba_hymns",
+  "info": {
+    "singularName": "yoruba-hymn",
+    "pluralName": "yoruba-hymns",
+    "displayName": "yorubaHymn"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "number": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

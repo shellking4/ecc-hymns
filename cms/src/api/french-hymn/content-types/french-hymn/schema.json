@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "french_hymns",
+  "info": {
+    "singularName": "french-hymn",
+    "pluralName": "french-hymns",
+    "displayName": "frenchHymn"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "number": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}

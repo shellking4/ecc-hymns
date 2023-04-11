@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "goun_hymns",
+  "info": {
+    "singularName": "goun-hymn",
+    "pluralName": "goun-hymns",
+    "displayName": "gounHymn"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "number": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    }
+  }
+}
