@@ -48,7 +48,7 @@ class HymnItemView extends StatelessWidget {
                 decoration: TextDecoration.underline),
           ),
           SizedBox(height: 8.0),
-          Text(hymn.content,
+          Text(hymn.attributes.content,
               style: TextStyle(
                   fontFamily: "Kiwi", fontSize: 18, color: Colors.black)),
           SizedBox(height: 8.0),

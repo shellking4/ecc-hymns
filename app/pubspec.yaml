@@ -21,6 +21,10 @@ dependencies:
   easy_rich_text: ^0.5.4
   need_resume: ^1.0.5+1
   cupertino_icons: ^1.0.2
+  pretty_dio_logger: ^1.1.1
+  pretty_http_logger: ^0.2.1
+  dio_cache_interceptor: ^3.2.7
+  dio: ^5.1.1
 
 dev_dependencies:
   flutter_test:
