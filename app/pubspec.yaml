@@ -1,0 +1,70 @@
+name: ecchymns
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  json_annotation: ^4.8.0
+  flutter_sequence_animation: "^3.0.0"
+  animated_text_kit: ^4.2.2
+  font_awesome_flutter: ^10.4.0
+  route_transitions: ^1.0.2
+  flappy_search_bar_ns: ^2.0.2
+  easy_rich_text: ^0.5.4
+  need_resume: ^1.0.5+1
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  json_serializable: ^6.6.1
+  build_runner:
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - images/
+    - assets/hymnsData.db
+
+  fonts:
+    - family: Pacifico
+      fonts:
+        - asset: fonts/Pacifico/Pacifico-Regular.ttf
+
+    - family: Arvo
+      fonts:
+        - asset: fonts/Arvo/Arvo-Italic.ttf
+
+    - family: CodaCaption
+      fonts:
+        - asset: fonts/CodaCaption/CodaCaption-ExtraBold.ttf
+
+    - family: Anton
+      fonts:
+        - asset: fonts/Anton/Anton-Regular.ttf
+
+    - family: PermanentMarker
+      fonts:
+        - asset: fonts/PermanentMarker/PermanentMarker-Regular.ttf
+
+    - family: Lobster
+      fonts:
+        - asset: fonts/Lobster/Lobster-Regular.ttf
+
+    - family: Prata
+      fonts:
+        - asset: fonts/Prata/Prata-Regular.ttf
+
+    - family: Kiwi
+      fonts:
+        - asset: fonts/Kiwi_Maru/KiwiMaru-Regular.ttf
