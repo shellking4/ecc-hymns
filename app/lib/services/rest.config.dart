@@ -1,11 +1,13 @@
 import 'package:dio/dio.dart';
 
-class APIEndPoints {
-  static String baseUrl = "http://192.168.0.108:1337/api";
-  static final gounHymnsUrl = "$baseUrl/goun-hymns";
-  static final frenchHymnsUrl = "$baseUrl/french-hymns";
-  static final englishHymnsUrl = "$baseUrl/english-hymns";
-  static final yorubaHymnsUrl = "$baseUrl/yoruba-hymns";
+class APIEndpoints {
+  static String localApiBaseUrl = "http://192.168.175.39:1337/api";
+  static String networkApiBaseUrl = "http://192.168.175.39:1337/api";
+  static String baseUrl = localApiBaseUrl;
+  static final String gounHymnsUrl = "$baseUrl/goun-hymns?sort[0]=id%3Aasc";
+  static final String frenchHymnsUrl = "$baseUrl/french-hymns";
+  static final String englishHymnsUrl = "$baseUrl/english-hymns";
+  static final String yorubaHymnsUrl = "$baseUrl/yoruba-hymns";
 }
 
 class HTTP {
@@ -21,4 +23,3 @@ class HTTP {
       });
   static final Dio client = Dio(options);
 }
-

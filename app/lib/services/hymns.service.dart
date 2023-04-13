@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ecchymns/models/english_hymn.model.dart';
 import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:ecchymns/models/goun_hymns_data.model.dart';
-import 'package:ecchymns/models/goun_hymns_list.model.dart';
 import 'package:ecchymns/models/hymns_program.model.dart';
 import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:ecchymns/services/rest.config.dart';
@@ -13,7 +12,7 @@ class HymnsService {
   static Future<List<GounHymn>> getAllGounHymns() async {
     List<GounHymn>? hymns;
     try {
-      final response = await HTTP.client.get<String>(APIEndPoints.gounHymnsUrl);
+      final response = await HTTP.client.get<String>(APIEndpoints.gounHymnsUrl);
       String data = "${response.data}";
       final jsonData = jsonDecode(data);
       var hymnsListData = GounHymnsData.fromJson(jsonData);

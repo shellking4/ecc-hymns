@@ -6,6 +6,7 @@ import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 import '../utilities/custom_drawer.util.dart';
 import 'french_hymn.screen.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'goun_hymn.screen.dart';
 import 'yoruba_hymn.screen.dart';
 
@@ -29,7 +30,9 @@ class HymnItemView extends StatelessWidget {
   Widget buildHymnItemView(BuildContext context, data, index) {
     var hymn;
     if ((hymnItem != null) &&
-        (hymnItem is GounHymn || hymnItem is FrenchHymn || hymnItem is YorubaHymn)) {
+        (hymnItem is GounHymn ||
+            hymnItem is FrenchHymn ||
+            hymnItem is YorubaHymn)) {
       hymn = hymnItem;
     } else {
       hymn = data[index];
@@ -48,9 +51,10 @@ class HymnItemView extends StatelessWidget {
                 decoration: TextDecoration.underline),
           ),
           SizedBox(height: 8.0),
-          Text(hymn.attributes.content,
-              style: TextStyle(
-                  fontFamily: "Kiwi", fontSize: 18, color: Colors.black)),
+          Html(data: "${hymn.attributes.content}"),
+          // Text(hymn.attributes.content,
+          //     style: TextStyle(
+          //         fontFamily: "Kiwi", fontSize: 18, color: Colors.black)),
           SizedBox(height: 8.0),
           RoundedButton(
               color: themeColor1,

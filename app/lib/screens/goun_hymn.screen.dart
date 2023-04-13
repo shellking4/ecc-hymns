@@ -3,6 +3,7 @@ import '../models/goun_hymn.model.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 class GounHymnScreen extends StatefulWidget {
   static const String id = 'goun_hymn_screen';
@@ -49,12 +50,16 @@ class _GounHymnScreenState extends State<GounHymnScreen> {
                           decoration: TextDecoration.underline),
                     ),
                     SizedBox(height: 20.0),
-                    Text(widget.gounHymnItem?.attributes?.content as String,
-                        style: TextStyle(
-                            fontFamily: "Kiwi",
-                            fontSize: 16.0,
-                            color: Colors.black)),
-                    SizedBox(height: 300.0),
+                    Html(
+                        data: "${widget.gounHymnItem?.attributes?.content}",
+                        style: {
+                          "p": Style(
+                            fontFamily: "Kiwi", 
+                            fontSize: FontSize(18), 
+                            color: Colors.black
+                          )
+                        }),
+                    SizedBox(height: 150.0),
                     RoundedButton(
                         color: themeColor1,
                         title: "RETOUR",
