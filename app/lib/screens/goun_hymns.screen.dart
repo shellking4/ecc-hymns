@@ -18,7 +18,7 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
   Future<List<GounHymn>>? _gounHymns;
   List<GounHymn>? listOfGounnHymns;
   List<HymnsProgram>? progs;
-  GlobalKey<ScaffoldState> _key = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

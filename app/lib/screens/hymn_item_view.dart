@@ -29,10 +29,7 @@ class HymnItemView extends StatelessWidget {
 
   Widget buildHymnItemView(BuildContext context, data, index) {
     var hymn;
-    if ((hymnItem != null) &&
-        (hymnItem is GounHymn ||
-            hymnItem is FrenchHymn ||
-            hymnItem is YorubaHymn)) {
+    if ((hymnItem != null) && (hymnItem is GounHymn || hymnItem is FrenchHymn || hymnItem is YorubaHymn)) {
       hymn = hymnItem;
     } else {
       hymn = data[index];
@@ -51,10 +48,9 @@ class HymnItemView extends StatelessWidget {
                 decoration: TextDecoration.underline),
           ),
           SizedBox(height: 8.0),
-          Html(data: "${hymn.attributes.content}"),
-          // Text(hymn.attributes.content,
-          //     style: TextStyle(
-          //         fontFamily: "Kiwi", fontSize: 18, color: Colors.black)),
+          Html(
+              data: "${hymn?.attributes?.content}",
+              style: {"p": Style(fontFamily: "Kiwi", fontSize: FontSize(16), color: Colors.black)}),
           SizedBox(height: 8.0),
           RoundedButton(
               color: themeColor1,
@@ -74,18 +70,15 @@ class HymnItemView extends StatelessWidget {
   getHymnAndNavigate(hymnItem, BuildContext context) {
     if (hymnItem is GounHymn) {
       Widget child = GounHymnScreen(gounHymnItem: hymnItem);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
     }
     if (hymnItem is FrenchHymn) {
       Widget child = FrenchHymnScreen(frenchHymnItem: hymnItem);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
     }
     if (hymnItem is YorubaHymn) {
       Widget child = YorubaHymnScreen(yorubaHymnItem: hymnItem);
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
     }
   }
 

@@ -7,7 +7,7 @@ bool isNumeric(String? s) {
   return double.tryParse(s) != null;
 }
 
-// for all vowels and accents
+
 List<String> generatePossibleSearchTerms(String searchTerm) {
   String vowels = "aeiouy";
   if (!vowels.split("").any((v) => searchTerm.contains(v))) {

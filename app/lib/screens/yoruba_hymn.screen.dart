@@ -1,5 +1,6 @@
 import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
@@ -49,11 +50,15 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
                           decoration: TextDecoration.underline),
                     ),
                     SizedBox(height: 20.0),
-                    Text(widget.yorubaHymnItem?.attributes?.content as String,
-                        style: TextStyle(
-                            fontFamily: "Kiwi",
-                            fontSize: 16.0,
-                            color: Colors.black)),
+                    Html(
+                        data: "${widget.yorubaHymnItem?.attributes?.content}",
+                        style: {
+                          "p": Style(
+                            fontFamily: "Kiwi", 
+                            fontSize: FontSize(18), 
+                            color: Colors.black
+                          )
+                        }),
                     SizedBox(height: 300.0),
                     RoundedButton(
                         color: themeColor1,

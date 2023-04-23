@@ -1,5 +1,6 @@
 import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
@@ -26,11 +27,9 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
+        theme: ThemeData(scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
         home: Scaffold(
-            appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
-                FrenchHymnScreen.id, 23.9, 11.1, 184.3, 162.1),
+            appBar: MyAppBar.getAppBar(context, setAppBarTitle(), FrenchHymnScreen.id, 23.9, 11.1, 184.3, 162.1),
             body: SingleChildScrollView(
               child: ListTile(
                 title: Column(
@@ -49,11 +48,9 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
                           decoration: TextDecoration.underline),
                     ),
                     SizedBox(height: 20.0),
-                    Text(widget.frenchHymnItem?.attributes?.content as String,
-                        style: TextStyle(
-                            fontFamily: "Kiwi",
-                            fontSize: 17.0,
-                            color: Colors.black)),
+                    Html(
+                        data: "${widget.frenchHymnItem?.attributes?.content}",
+                        style: {"p": Style(fontFamily: "Kiwi", fontSize: FontSize(18), color: Colors.black)}),
                     SizedBox(height: 300.0),
                     RoundedButton(
                         color: themeColor1,
