@@ -5,10 +5,10 @@ part 'yoruba_hymns_data.model.g.dart';
 
 @JsonSerializable()
 class YorubaHymnsData {
-  final List<YorubaHymn>? hymns;
+  final List<YorubaHymn>? data;
   final dynamic meta;
 
-  YorubaHymnsData(this.hymns, this.meta);
+  YorubaHymnsData(this.data, this.meta);
 
   factory YorubaHymnsData.fromJson(Map<String, dynamic> json) =>
       _$YorubaHymnsDataFromJson(json);

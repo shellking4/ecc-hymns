@@ -4,7 +4,8 @@
   "info": {
     "singularName": "yoruba-hymn",
     "pluralName": "yoruba-hymns",
-    "displayName": "yorubaHymn"
+    "displayName": "yorubaHymn",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,6 +25,16 @@
         "preset": "rich"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "audio": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

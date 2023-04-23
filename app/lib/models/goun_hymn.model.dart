@@ -11,6 +11,6 @@ class GounHymn {
 
   factory GounHymn.fromJson(Map<String, dynamic> json) =>
       _$GounHymnFromJson(json);
-
+  
   Map<String, dynamic> toJson() => _$GounHymnToJson(this);
 }

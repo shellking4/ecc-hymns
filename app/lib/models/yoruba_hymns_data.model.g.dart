@@ -8,7 +8,7 @@ part of 'yoruba_hymns_data.model.dart';
 
 YorubaHymnsData _$YorubaHymnsDataFromJson(Map<String, dynamic> json) =>
     YorubaHymnsData(
-      (json['hymns'] as List<dynamic>?)
+      (json['data'] as List<dynamic>?)
           ?.map((e) => YorubaHymn.fromJson(e as Map<String, dynamic>))
           .toList(),
       json['meta'],
@@ -16,6 +16,6 @@ YorubaHymnsData _$YorubaHymnsDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$YorubaHymnsDataToJson(YorubaHymnsData instance) =>
     <String, dynamic>{
-      'hymns': instance.hymns,
+      'data': instance.data,
       'meta': instance.meta,
     };

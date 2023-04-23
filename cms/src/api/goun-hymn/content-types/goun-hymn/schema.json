@@ -4,7 +4,8 @@
   "info": {
     "singularName": "goun-hymn",
     "pluralName": "goun-hymns",
-    "displayName": "gounHymn"
+    "displayName": "gounHymn",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -24,6 +25,16 @@
         "preset": "rich"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "audio": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
