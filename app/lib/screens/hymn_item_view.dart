@@ -27,6 +27,7 @@ class HymnItemView extends StatelessWidget {
     return "CANTIQUE";
   }
 
+
   Widget buildHymnItemView(BuildContext context, data, index) {
     var hymn;
     if ((hymnItem != null) && (hymnItem is GounHymn || hymnItem is FrenchHymn || hymnItem is YorubaHymn)) {
