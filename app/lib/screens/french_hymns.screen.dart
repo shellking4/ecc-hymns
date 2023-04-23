@@ -45,9 +45,8 @@ class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
         future: _frenchHymns,
         builder: (BuildContext context, AsyncSnapshot<List<FrenchHymn>> snapshot) {
           if (snapshot.hasData) {
-            List<FrenchHymn> frenchHymns = snapshot.data!;
-            listOfFrenchHymns = frenchHymns;
-            return frenchHymn(frenchHymns);
+            listOfFrenchHymns = snapshot.data!;
+            return frenchHymn(listOfFrenchHymns);
           } else if (snapshot.hasError) {
             return Text(
               "${snapshot.error}",

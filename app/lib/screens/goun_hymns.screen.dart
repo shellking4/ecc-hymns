@@ -57,12 +57,13 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
         builder:
             (BuildContext context, AsyncSnapshot<List<GounHymn>> snapshot) {
           if (snapshot.hasData) {
-            List<GounHymn> gounHymns = snapshot.data!;
-            listOfGounnHymns = gounHymns;
-            return gounHymn(gounHymns);
+            listOfGounnHymns = snapshot.data!;
+            return gounHymn(listOfGounnHymns);
           } else if (snapshot.hasError) {
-            return Text("${snapshot.error}",
-                style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0));
+            return Center(
+              child: Text("Veuillez patienter pendant que nous mettons les choses en place",
+                  style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0)),
+            );
           }
           return Center(
             child: CircularProgressIndicator(),

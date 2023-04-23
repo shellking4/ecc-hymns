@@ -45,9 +45,8 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
         future: _yorubaHymns,
         builder: (BuildContext context, AsyncSnapshot<List<YorubaHymn>> snapshot) {
           if (snapshot.hasData) {
-            List<YorubaHymn> yorubaHymns = snapshot.data!;
-            listOfyorubaHymns = yorubaHymns;
-            return yorubaHymn(yorubaHymns);
+            listOfyorubaHymns = snapshot.data!;
+            return yorubaHymn(listOfyorubaHymns);
           } else if (snapshot.hasError) {
             return Text("${snapshot.error}");
           }
