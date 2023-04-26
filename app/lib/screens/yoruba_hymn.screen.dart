@@ -1,13 +1,13 @@
-import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import '../database/database.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 
 class YorubaHymnScreen extends StatefulWidget {
   static const String id = 'yoruba_hymn_screen';
-  final YorubaHymn? yorubaHymnItem;
+  final YrHymn? yorubaHymnItem;
   YorubaHymnScreen({Key? key, this.yorubaHymnItem}) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
   }
 
   String setAppBarTitle() {
-    return "CANTIQUE YORUBA N°${widget.yorubaHymnItem?.attributes?.number}";
+    return "CANTIQUE YORUBA N°${widget.yorubaHymnItem?.number}";
   }
 
   @override
@@ -41,7 +41,7 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
                       height: 15.0,
                     ),
                     Text(
-                      "CANTIQUE N°${widget.yorubaHymnItem?.attributes?.number}",
+                      "CANTIQUE N°${widget.yorubaHymnItem?.number}",
                       style: TextStyle(
                           fontFamily: "Kiwi",
                           fontSize: 18.0,
@@ -51,7 +51,7 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
                     ),
                     SizedBox(height: 20.0),
                     Html(
-                        data: "${widget.yorubaHymnItem?.attributes?.content}",
+                        data: "${widget.yorubaHymnItem?.content}",
                         style: {
                           "p": Style(
                             fontFamily: "Kiwi", 

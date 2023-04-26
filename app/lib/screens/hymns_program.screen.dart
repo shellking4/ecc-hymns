@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
-import '../models/hymns_program.model.dart';
+import '../database/database.dart';
 import '../services/hymns.service.dart';
 import '../utilities/app_bar.util.dart';
 
@@ -11,8 +11,8 @@ class HymnsProgramScreen extends StatefulWidget {
 }
 
 class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
-  List<HymnsProgram>? listOfHymnPrograms;
-  Future<List<HymnsProgram>>? _hymnsPrograms;
+  List<HymnProgram>? listOfHymnPrograms;
+  Future<List<HymnProgram>>? _hymnsPrograms;
   Color? color;
   int selectedIndex = -1;
   String first = "1st";
@@ -35,9 +35,9 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: MyAppBar.getAppBar(context, setAppBarTitle(), HymnsProgramScreen.id, 16.9, 28.8, 184.3, 162.1),
-        body: FutureBuilder<List<HymnsProgram>>(
+        body: FutureBuilder<List<HymnProgram>>(
             future: _hymnsPrograms,
-            builder: (BuildContext context, AsyncSnapshot<List<HymnsProgram>> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<List<HymnProgram>> snapshot) {
               if (snapshot.hasData) {
                 listOfHymnPrograms = snapshot.data!;
                 return SingleChildScrollView(
@@ -194,16 +194,15 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                                       }),
                                       cells: [
                                         DataCell(Text(
-                                          hymnProgram.attributes?.date == null
-                                              ? ""
-                                              : hymnProgram.attributes?.date as String,
+                                          hymnProgram.date,
                                           style: TextStyle(
-                                              fontFamily: "Kiwi", fontSize: 14.0, fontWeight: FontWeight.bold),
+                                              fontFamily: "Kiwi", 
+                                              fontSize: 14.0, 
+                                              fontWeight: FontWeight.bold
+                                          ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.firstHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.firstHymn as String,
+                                          hymnProgram.firstHymn,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
@@ -211,54 +210,42 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                                           ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.secondHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.secondHymn as String,
+                                          hymnProgram.secondHymn,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
                                             fontSize: 12.0,
                                           ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.thirdHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.thirdHymn as String,
+                                          hymnProgram.thirdHymn,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
                                             fontSize: 12.0,
                                           ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.fourthHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.fourthHymn as String,
+                                          hymnProgram.fourthHymn,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
                                             fontSize: 12.0,
                                           ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.fifthHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.fifthHymn as String,
+                                          hymnProgram.fifthHymn,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
                                             fontSize: 12.0,
                                           ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.sixthHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.sixthHymn as String,
+                                          hymnProgram.sixthHymn,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
                                             fontSize: 12.0,
                                           ),
                                         )),
                                         DataCell(Text(
-                                          hymnProgram.attributes?.seventhHymn == null
-                                              ? ""
-                                              : hymnProgram.attributes?.seventhHymn as String,
+                                          hymnProgram.seventhHymn,
                                           style: TextStyle(
                                             fontFamily: "Kiwi",
                                             fontSize: 12.0,

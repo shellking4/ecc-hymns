@@ -1,150 +1,79 @@
-import 'dart:convert';
-import 'package:ecchymns/models/english_hymn.model.dart';
-import 'package:ecchymns/models/english_hymns_data.model.dart';
-import 'package:ecchymns/models/french_hymn.model.dart';
-import 'package:ecchymns/models/french_hymns_data.model.dart';
-import 'package:ecchymns/models/goun_hymns_data.model.dart';
-import 'package:ecchymns/models/hymns_program.model.dart';
-import 'package:ecchymns/models/hymns_programs_data.model.dart';
-import 'package:ecchymns/models/yoruba_hymn.model.dart';
-import 'package:ecchymns/models/yoruba_hymns_data.model.dart';
-import 'package:ecchymns/services/rest.config.dart';
-import 'package:ecchymns/utilities/functions.util.dart';
-import '../models/goun_hymn.model.dart';
+import 'dart:core';
+import 'package:drift/drift.dart';
+import '../database/database.dart';
 
 class HymnsService {
+  static EccHymnsDb db = EccHymnsDb();
+
   static Future<List<GounHymn>> getAllGounHymns() async {
-    List<GounHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.gounHymnsUrl);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = GounHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
-    }
-    return hymns!;
+    return db.allGounHymns().get();
   }
 
-  static Future<List<FrenchHymn>>? getAllFrenchHymns() async {
-    List<FrenchHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.frenchHymnsUrl);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = FrenchHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
-    }
-    return hymns!;
+  static Future<List<FrHymn>> getAllFrenchHymns() async {
+    return db.allFrenchHymns().get();
   }
 
-  static Future<List<YorubaHymn>> getAllYorubaHymns() async {
-    List<YorubaHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.yorubaHymnsUrl);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = YorubaHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
-    }
-    return hymns!;
+  static Future<List<YrHymn>> getAllYorubaHymns() async {
+    return db.allYorubaHymns().get();
   }
 
-  static Future<List<EnglishHymn>> getAllEnglishHymns() async {
-    List<EnglishHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.englishHymnsUrl);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = EnglishHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
-    }
-    return hymns!;
+  static Future<List<EnHymn>> getAllEnglishHymns() async {
+    return db.allEnglishHymns().get();
   }
 
-  static Future<List<HymnsProgram>> getAllHymnsProgram() async {
-    List<HymnsProgram>? programs;
-    var queryUri = buildQueryUri(APIEndpoints.hymnsProgramsUrl);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = HymnsProgramsData.fromJson(jsonData);
-      programs = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
-    }
-    return programs!;
+  static Future<List<HymnProgram>> getAllHymnsProgram() async {
+    return db.allHymnPrograms().get();
   }
 
-  static Future<List<GounHymn>> getGounHymnSearchResults(String searchQuery) async {
-    List<GounHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.gounHymnsUrl, searchTerm: searchQuery);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = GounHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
+  static Future<List<GounHymn>> getGounHymnSearchResults(String searchQuery) {
+    RegExp re = RegExp(r'[0-9]+$');
+    if (re.hasMatch(searchQuery)) {
+      String content = "gounHymns MATCH '$searchQuery'";
+      var match = CustomExpression<bool>(content);
+      return db.gounHymnSearchResults(predicate: (hymn) => match).get();
     }
-    return hymns!;
+    searchQuery.toUpperCase();
+    String content = "gounHymns MATCH '$searchQuery*'";
+    var match = CustomExpression<bool>(content);
+    return db.gounHymnSearchResults(predicate: (hymn) => match).get();
   }
 
-  static Future<List<FrenchHymn>> getFrenchHymnSearchResults(String searchQuery) async {
-    List<FrenchHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.frenchHymnsUrl, searchTerm: searchQuery);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = FrenchHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
+  static Future<List<FrHymn>> getFrenchHymnSearchResults(String searchQuery) {
+    RegExp re = RegExp(r'[0-9]+$');
+    if (re.hasMatch(searchQuery)) {
+      String content = "frHymns MATCH '$searchQuery'";
+      var match = CustomExpression<bool>(content);
+      return db.frenchHymnSearchResults(predicate: (hyln) => match).get();
     }
-    return hymns!;
+    searchQuery.toUpperCase();
+    String content = "frHymns MATCH '$searchQuery*'";
+    var match = CustomExpression<bool>(content);
+    return db.frenchHymnSearchResults(predicate: (hymn) => match).get();
   }
 
-  static Future<List<YorubaHymn>> getYorubaHymnSearchResults(String searchQuery) async {
-    List<YorubaHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.yorubaHymnsUrl, searchTerm: searchQuery);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = YorubaHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
+  static Future<List<YrHymn>> getYorubaHymnSearchResults(String searchQuery) {
+    RegExp re = RegExp(r'[0-9]+$');
+    if (re.hasMatch(searchQuery)) {
+      String content = "yrHymns MATCH '$searchQuery'";
+      var match = CustomExpression<bool>(content);
+      return db.yorubaHymnSearchResults(predicate: (hymn) => match).get();
     }
-    return hymns!;
+    searchQuery.toUpperCase();
+    String content = "yrHymns MATCH '$searchQuery*'";
+    var match = CustomExpression<bool>(content);
+    return db.yorubaHymnSearchResults(predicate: (hymn) => match).get();
   }
 
-  static Future<List<EnglishHymn>>? getEnglishHymnSearchResults(String searchQuery) async {
-    List<EnglishHymn>? hymns;
-    var queryUri = buildQueryUri(APIEndpoints.englishHymnsUrl, searchTerm: searchQuery);
-    try {
-      final response = await HTTP.client.get<String>(queryUri);
-      String data = "${response.data}";
-      final jsonData = jsonDecode(data);
-      var hymnsListData = EnglishHymnsData.fromJson(jsonData);
-      hymns = hymnsListData.data!;
-    } catch (exception) {
-      //print(exception.toString());
+  static Future<List<EnHymn>> getEnglishHymnSearchResults(String searchQuery) {
+    RegExp re = RegExp(r'[0-9]+$');
+    if (re.hasMatch(searchQuery)) {
+      String content = "enHymns MATCH '$searchQuery'";
+      var match = CustomExpression<bool>(content);
+      return db.englishHymnSearchResults(predicate: (hymn) => match).get();
     }
-    return hymns!;
+    searchQuery.toUpperCase();
+    String content = "enHymns MATCH '$searchQuery*'";
+    var match = CustomExpression<bool>(content);
+    return db.englishHymnSearchResults(predicate: (hymn) => match).get();
   }
 }

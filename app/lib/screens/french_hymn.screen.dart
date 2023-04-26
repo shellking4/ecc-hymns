@@ -1,13 +1,13 @@
-import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import '../database/database.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 
 class FrenchHymnScreen extends StatefulWidget {
   static const String id = 'french_hymn_screen';
-  final FrenchHymn? frenchHymnItem;
+  final FrHymn? frenchHymnItem;
   FrenchHymnScreen({Key? key, this.frenchHymnItem}) : super(key: key);
 
   @override
@@ -20,7 +20,7 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
   }
 
   String setAppBarTitle() {
-    return "CANTIQUE FRANÇAIS N°${widget.frenchHymnItem?.attributes?.number}";
+    return "CANTIQUE FRANÇAIS N°${widget.frenchHymnItem?.number}";
   }
 
   @override
@@ -39,7 +39,7 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
                       height: 15.0,
                     ),
                     Text(
-                      "CANTIQUE N°${widget.frenchHymnItem?.attributes?.number}",
+                      "CANTIQUE N°${widget.frenchHymnItem?.number}",
                       style: TextStyle(
                           fontFamily: "Kiwi",
                           fontSize: 15.6,
@@ -49,7 +49,7 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
                     ),
                     SizedBox(height: 20.0),
                     Html(
-                        data: "${widget.frenchHymnItem?.attributes?.content}",
+                        data: "${widget.frenchHymnItem?.content}",
                         style: {"p": Style(fontFamily: "Kiwi", fontSize: FontSize(18), color: Colors.black)}),
                     SizedBox(height: 300.0),
                     RoundedButton(

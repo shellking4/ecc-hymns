@@ -1,7 +1,5 @@
-import 'package:ecchymns/models/french_hymn.model.dart';
-import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:flutter/material.dart';
-import '../models/goun_hymn.model.dart';
+import '../database/database.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 import '../utilities/custom_drawer.util.dart';
@@ -16,13 +14,13 @@ class HymnItemView extends StatelessWidget {
 
   String setTitle(hymn) {
     if (hymn is GounHymn) {
-      return "CANTIQUE N°${hymn.attributes?.number}";
+      return "CANTIQUE N°${hymn.number}";
     }
-    if (hymn is FrenchHymn) {
-      return "CANTIQUE N°${hymn.attributes?.number}";
+    if (hymn is FrHymn) {
+      return "CANTIQUE N°${hymn.number}";
     }
-    if (hymn is YorubaHymn) {
-      return "CANTIQUE N°${hymn.attributes?.number}";
+    if (hymn is YrHymn) {
+      return "CANTIQUE N°${hymn.number}";
     }
     return "CANTIQUE";
   }
@@ -30,7 +28,7 @@ class HymnItemView extends StatelessWidget {
 
   Widget buildHymnItemView(BuildContext context, data, index) {
     var hymn;
-    if ((hymnItem != null) && (hymnItem is GounHymn || hymnItem is FrenchHymn || hymnItem is YorubaHymn)) {
+    if ((hymnItem != null) && (hymnItem is GounHymn || hymnItem is FrHymn || hymnItem is YrHymn)) {
       hymn = hymnItem;
     } else {
       hymn = data[index];
@@ -50,7 +48,7 @@ class HymnItemView extends StatelessWidget {
           ),
           SizedBox(height: 8.0),
           Html(
-              data: "${hymn?.attributes?.content}",
+              data: "${hymn?.content}",
               style: {"p": Style(fontFamily: "Kiwi", fontSize: FontSize(16), color: Colors.black)}),
           SizedBox(height: 8.0),
           RoundedButton(
@@ -73,11 +71,11 @@ class HymnItemView extends StatelessWidget {
       Widget child = GounHymnScreen(gounHymnItem: hymnItem);
       Navigator.push(context, MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
     }
-    if (hymnItem is FrenchHymn) {
+    if (hymnItem is FrHymn) {
       Widget child = FrenchHymnScreen(frenchHymnItem: hymnItem);
       Navigator.push(context, MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
     }
-    if (hymnItem is YorubaHymn) {
+    if (hymnItem is YrHymn) {
       Widget child = YorubaHymnScreen(yorubaHymnItem: hymnItem);
       Navigator.push(context, MaterialPageRoute(builder: (context) => CustomDrawer(child: child)));
     }

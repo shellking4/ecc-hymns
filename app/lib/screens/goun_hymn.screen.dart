@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/goun_hymn.model.dart';
+import '../database/database.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
@@ -20,7 +20,7 @@ class _GounHymnScreenState extends State<GounHymnScreen> {
   }
 
   String setAppBarTitle() {
-    return "CANTIQUE GOUN N°${widget.gounHymnItem?.attributes?.number}";
+    return "CANTIQUE GOUN N°${widget.gounHymnItem?.number}";
   }
 
   @override
@@ -41,7 +41,7 @@ class _GounHymnScreenState extends State<GounHymnScreen> {
                       height: 15.0,
                     ),
                     Text(
-                      "CANTIQUE N°${widget.gounHymnItem?.attributes?.number}",
+                      "CANTIQUE N°${widget.gounHymnItem?.number}",
                       style: TextStyle(
                           fontFamily: "Kiwi",
                           fontSize: 15.6,
@@ -51,7 +51,7 @@ class _GounHymnScreenState extends State<GounHymnScreen> {
                     ),
                     SizedBox(height: 20.0),
                     Html(
-                        data: "${widget.gounHymnItem?.attributes?.content}",
+                        data: "${widget.gounHymnItem?.content}",
                         style: {
                           "p": Style(
                             fontFamily: "Kiwi", 

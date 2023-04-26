@@ -1,4 +1,3 @@
-import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
 import '../utilities/app_bar.util.dart';
@@ -14,12 +13,12 @@ class YorubaHymnsScreen extends StatefulWidget {
 
 class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
   // ignore: unused_field
-  Future<List<YorubaHymn>>? _yorubaHymns;
-  List<YorubaHymn>? listOfyorubaHymns;
+  Future<List<YrbaHymn>>? _yorubaHymns;
+  List<YrbaHymn>? listOfyorubaHymns;
 
   @override
   void initState() {
-    _yorubaHymns = HymnsService.getAllYorubaHymns();
+    _yorubaHymns = HymnsService.getAllYorubaHymns() as Future<List<YrbaHymn>>?;
     super.initState();
   }
 
@@ -41,9 +40,9 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
   }
 
   FutureBuilder yorubaHymnsData() {
-    return FutureBuilder<List<YorubaHymn>>(
+    return FutureBuilder<List<YrbaHymn>>(
         future: _yorubaHymns,
-        builder: (BuildContext context, AsyncSnapshot<List<YorubaHymn>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<YrbaHymn>> snapshot) {
           if (snapshot.hasData) {
             listOfyorubaHymns = snapshot.data!;
             return yorubaHymn(listOfyorubaHymns);
@@ -66,4 +65,7 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
       },
     );
   }
+}
+
+class YrbaHymn {
 }
