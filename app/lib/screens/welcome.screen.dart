@@ -48,24 +48,23 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     height: (isPortrait) ? 0.0 : 45.0,
                     width: (isPortrait) ? 30 : 176,
                   ),
-                  Container(
-                      child: CircleAvatar(
+                  CircleAvatar(
                     backgroundColor: Colors.black,
                     backgroundImage: AssetImage('images/eccHymns.jpeg'),
                     radius: 20.0,
-                  )),
+                  ),
                   SizedBox(
                     width: 20.0,
                   ),
                   Center(
                     child: TypewriterAnimatedTextKit(
-                      text: ['E C C   H Y M N S'],
+                      text: ["CANTIQUES DE L'ECC"],
                       speed: Duration(milliseconds: 85),
                       repeatForever: false,
                       totalRepeatCount: 1,
                       textStyle: TextStyle(
                           fontWeight: FontWeight.w900,
-                          fontSize: 24,
+                          fontSize: 18,
                           fontFamily: "Kiwi",
                           color: Colors.white),
                     ),
