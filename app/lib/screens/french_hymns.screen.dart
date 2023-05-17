@@ -2,6 +2,7 @@ import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
 import '../utilities/app_bar.util.dart';
+import '../utilities/base_scaffold.util.dart';
 import 'hymn_item_view.dart';
 
 class FrenchHymnsScreen extends StatefulWidget {
@@ -29,11 +30,8 @@ class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
-            FrenchHymnsScreen.id, 28.4, 40.5, 184.3, 196.1),
-        body: Stack(
+    return BaseScaffold(
+        scaffoldBody: Stack(
           children: <Widget>[
             frenchHymnsData(),
           ],

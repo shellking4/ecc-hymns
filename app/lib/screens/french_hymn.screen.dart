@@ -2,6 +2,7 @@ import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../utilities/app_bar.util.dart';
+import '../utilities/base_scaffold.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 
@@ -28,9 +29,9 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
-        home: Scaffold(
+        home: BaseScaffold(
             appBar: MyAppBar.getAppBar(context, setAppBarTitle(), FrenchHymnScreen.id, 23.9, 11.1, 184.3, 162.1),
-            body: SingleChildScrollView(
+            scaffoldBody: SingleChildScrollView(
               child: ListTile(
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

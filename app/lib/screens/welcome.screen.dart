@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:ecchymns/screens/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 import '../pages/goun_hymns.page.dart';
 import '../utilities/constants.util.dart';
+import 'layout.screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';
@@ -19,13 +21,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   startTime() async {
-    var duration = new Duration(seconds: 6);
+    var duration = Duration(seconds: 6);
     return Timer(duration, route);
   }
 
   route() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => GounHymnsPage()));
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (BuildContext context) => LayoutScreen()),
+      (route) => false,
+    );
   }
 
   @override
@@ -35,75 +40,36 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       isPortrait = true;
     }
     return Scaffold(
-        backgroundColor: themeColor1,
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  SizedBox(
-                    height: (isPortrait) ? 0.0 : 45.0,
-                    width: (isPortrait) ? 30 : 176,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.black,
-                    backgroundImage: AssetImage('images/eccHymns.jpeg'),
-                    radius: 20.0,
-                  ),
-                  SizedBox(
-                    width: 20.0,
-                  ),
-                  Center(
-                    child: TypewriterAnimatedTextKit(
-                      text: ["CANTIQUES DE L'ECC"],
-                      speed: Duration(milliseconds: 85),
-                      repeatForever: false,
-                      totalRepeatCount: 1,
-                      textStyle: TextStyle(
-                          fontWeight: FontWeight.w900,
-                          fontSize: 18,
-                          fontFamily: "Kiwi",
-                          color: Colors.white),
+        backgroundColor: Colors.white,
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+                Image.asset(
+                  'images/ecc-logo.png',
+                  height: 130,
+                  width: 130,
+                ),
+                SizedBox(
+                  height: (isPortrait) ? 0.0 : 45.0,
+                  width: (isPortrait) ? 30 : 176,
+                ),
+                Center(
+                  child: Text(
+                    "ECC CANTIQUES",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900, 
+                      fontSize: 17, 
+                      fontFamily: "Inter",
+                      color: eccBlue
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 200.0,
-              ),
-              Center(
-                child: TypewriterAnimatedTextKit(
-                  text: ['B Y   D E V C R A F T   ,  L L C'],
-                  speed: Duration(milliseconds: 85),
-                  repeatForever: false,
-                  totalRepeatCount: 1,
-                  textStyle: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 14,
-                      fontFamily: "Kiwi",
-                      color: Colors.white),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 15.0,
-              ),
-              Center(
-                child: TypewriterAnimatedTextKit(
-                  text: ['d o n a l d k a n t 2 0 0 0 @ g m a i l . c o m'],
-                  speed: Duration(milliseconds: 85),
-                  repeatForever: false,
-                  totalRepeatCount: 1,
-                  textStyle: TextStyle(
-                      fontWeight: FontWeight.w900,
-                      fontSize: 10,
-                      fontFamily: "Kiwi",
-                      color: Colors.white),
-                ),
-              )
-            ],
+              ],
+            ),
           ),
         ));
   }

@@ -2,6 +2,7 @@ import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
 import '../utilities/app_bar.util.dart';
+import '../utilities/base_scaffold.util.dart';
 import 'hymn_item_view.dart';
 
 class YorubaHymnsScreen extends StatefulWidget {
@@ -29,11 +30,10 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
+    return BaseScaffold(
         appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
             YorubaHymnsScreen.id, 36.3, 38.0, 184.3, 196.1),
-        body: Stack(
+        scaffoldBody: Stack(
           children: <Widget>[
             yorubaHymnsData(),
           ],

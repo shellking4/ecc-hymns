@@ -5,25 +5,22 @@ class Menu_Item extends StatelessWidget {
   final String title;
   final IconData? icon1;
   final IconData? icon2;
-  final dynamic? screen;
+  final dynamic screen;
   final Color? color;
 
-  const Menu_Item(
-      {Key? key, required this.title, this.icon1, this.icon2, this.color, this.screen})
-      : super(key: key);
+  const Menu_Item({Key? key, required this.title, this.icon1, this.icon2, this.color, this.screen}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(vertical: 28.6, horizontal: 5.0),
+      padding: EdgeInsets.symmetric(vertical: 15, horizontal: 5.0),
       child: Material(
-        elevation: 1.0,
+        elevation: 0.0,
         color: color,
         borderRadius: BorderRadius.circular(20.0),
         child: MaterialButton(
             onPressed: () {
               Navigator.pop(context);
-              Navigator.push(
-                  context, new MaterialPageRoute(builder: (context) => screen));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => screen));
             },
             padding: EdgeInsets.symmetric(horizontal: 10),
             minWidth: 10.0,
@@ -31,23 +28,20 @@ class Menu_Item extends StatelessWidget {
             child: Row(children: <Widget>[
               Icon(
                 icon1,
-                color: Colors.white,
+                color: Colors.black,
                 size: 12,
               ),
               Icon(
                 icon2,
-                color: Colors.white,
+                color: Colors.black,
                 size: 12,
               ),
               SizedBox(
-                width: 10,
+                width: 5,
               ),
               Text(title,
-                  style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 11,
-                      color: Colors.white,
-                      fontFamily: "Kiwi"))
+                  style:
+                      TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: Colors.black, fontFamily: "InterRegular"))
             ])),
       ),
     );

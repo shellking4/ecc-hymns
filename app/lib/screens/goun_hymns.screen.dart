@@ -3,6 +3,8 @@ import '../models/goun_hymn.model.dart';
 import '../models/hymns_program.model.dart';
 import '../services/hymns.service.dart';
 import '../utilities/app_bar.util.dart';
+import '../utilities/base_scaffold.util.dart';
+import '../utilities/constants.util.dart';
 import 'hymn_item_view.dart';
 
 class GounHymnsScreen extends StatefulWidget {
@@ -40,12 +42,8 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
         }
         return false;
       },
-      child: Scaffold(
-          key: _key,
-          backgroundColor: Colors.white,
-          appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
-              GounHymnsScreen.id, 48.2, 45.4, 200.2, 197.1),
-          body: Stack(
+      child: BaseScaffold(
+          scaffoldBody: Stack(
             children: <Widget>[gounHymnsData()],
           )),
     );
@@ -54,8 +52,7 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
   FutureBuilder gounHymnsData() {
     return FutureBuilder<List<GounHymn>>(
         future: _gounHymns,
-        builder:
-            (BuildContext context, AsyncSnapshot<List<GounHymn>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<GounHymn>> snapshot) {
           if (snapshot.hasData) {
             listOfGounnHymns = snapshot.data!;
             return gounHymn(listOfGounnHymns);
@@ -76,8 +73,7 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
     return ListView.builder(
       itemCount: data.length,
       itemBuilder: (context, index) {
-        return Card(
-            child: hymnItemView.buildHymnItemView(context, data, index));
+        return Card(child: hymnItemView.buildHymnItemView(context, data, index));
       },
     );
   }

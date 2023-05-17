@@ -30,8 +30,6 @@ class _GounHymnScreenState extends State<GounHymnScreen> {
         theme: ThemeData(
             scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
         home: Scaffold(
-            appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
-                GounHymnScreen.id, 35.8, 31.2, 187.8, 190.8),
             body: SingleChildScrollView(
               child: ListTile(
                 title: Column(

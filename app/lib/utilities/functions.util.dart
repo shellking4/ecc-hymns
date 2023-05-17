@@ -1,3 +1,6 @@
+import 'package:ecchymns/screens/layout.screen.dart';
+import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:unorm_dart/unorm_dart.dart' as unorm;
 
 bool isNumeric(String? s) {
@@ -6,7 +9,6 @@ bool isNumeric(String? s) {
   }
   return double.tryParse(s) != null;
 }
-
 
 List<String> generatePossibleSearchTerms(String searchTerm) {
   String vowels = "aeiouy";
@@ -61,4 +63,27 @@ buildQueryUri(String baseUri, {String? searchTerm}) {
   }
   var queryUri = "$baseUri?sort[0]=id&pagination[page]=1&pagination[pageSize]=10000";
   return queryUri;
+}
+
+routeToScreenFromDrawer(BuildContext context, Widget screen) {
+  Navigator.pop(context);
+  PersistentNavBarNavigator.pushNewScreen(
+    context,
+    screen: (screen is LayoutScreen)
+        ? screen
+        : LayoutScreen(
+            initialScreen: screen,
+          ),
+    withNavBar: true,
+    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+  );
+}
+
+routeToScreen(BuildContext context, Widget screen) {
+  PersistentNavBarNavigator.pushNewScreen(
+    context,
+    screen: screen,
+    withNavBar: true,
+    pageTransitionAnimation: PageTransitionAnimation.cupertino,
+  );
 }

@@ -1,3 +1,4 @@
+import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import '../models/hymns_program.model.dart';
@@ -33,9 +34,8 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: MyAppBar.getAppBar(context, setAppBarTitle(), HymnsProgramScreen.id, 16.9, 28.8, 184.3, 162.1),
-        body: FutureBuilder<List<HymnsProgram>>(
+    return BaseScaffold(
+        scaffoldBody: FutureBuilder<List<HymnsProgram>>(
             future: _hymnsPrograms,
             builder: (BuildContext context, AsyncSnapshot<List<HymnsProgram>> snapshot) {
               if (snapshot.hasData) {

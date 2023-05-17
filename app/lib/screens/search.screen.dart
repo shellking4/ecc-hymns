@@ -39,8 +39,6 @@ class SearchSreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      appBar: MyAppBar.getAppBar(
-          context, setAppBarTitle(), SearchSreen.id, 42.2, 56.1, 200.2, 197.1),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),

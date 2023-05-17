@@ -1,5 +1,6 @@
+import 'package:ecchymns/screens/home.screen.dart';
+import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
-
 import 'pages/french_hymns.page.dart';
 import 'pages/goun_hymns.page.dart';
 import 'pages/yoruba_hymns.page.dart';
@@ -26,7 +27,9 @@ class EccHymns extends StatelessWidget {
       theme: ThemeData(
           scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
       initialRoute: WelcomeScreen.id,
+      home: LayoutScreen(),
       routes: {
+        HomeScreen.id: (context) => HomeScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
         GounHymnsScreen.id: (context) => GounHymnsScreen(),
         GounHymnScreen.id: (context) => GounHymnScreen(),

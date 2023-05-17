@@ -1,29 +1,14 @@
 import 'package:flutter/material.dart';
 import '../utilities/app_menu.util.dart';
+import '../utilities/base_scaffold.util.dart';
 
 // ignore: must_be_immutable
 class AboutScreen extends StatelessWidget {
   static String id = "about_screen";
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-            toolbarHeight: 70.0,
-            title: Row(
-              children: <Widget>[
-                SizedBox(width: 43.0),
-                Text(
-                  "ECC CANTIQUES ",
-                  style: TextStyle(
-                      fontSize: 17.0,
-                      letterSpacing: 0.6,
-                      fontFamily: "CodeCaption"),
-                ),
-              ],
-            )),
-        drawer: AppMenu(),
-        body: Center(
+    return BaseScaffold(
+        scaffoldBody: Center(
           child: Card(
             color: Color(0xFF6E4E57),
             margin: EdgeInsets.only(

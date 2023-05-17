@@ -6,6 +6,9 @@ import '../utilities/custom_drawer.util.dart';
 
 class GounHymnsPage extends StatefulWidget {
   static final String id = 'goun_hymns_page';
+
+  const GounHymnsPage({Key? key}) : super(key: key);
+
   @override
   GounHymnsPageState createState() => GounHymnsPageState();
 }

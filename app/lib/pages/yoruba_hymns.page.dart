@@ -6,6 +6,9 @@ import '../utilities/custom_drawer.util.dart';
 
 class YorubaHymnsPage extends StatefulWidget {
   static final String id = 'yoruba_hymns_page';
+
+  const YorubaHymnsPage({Key? key}) : super(key: key);
+
   @override
   YorubaHymnsPageState createState() => YorubaHymnsPageState();
 }

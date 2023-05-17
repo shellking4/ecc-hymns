@@ -2,6 +2,7 @@ import 'package:ecchymns/models/yoruba_hymn.model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import '../utilities/app_bar.util.dart';
+import '../utilities/base_scaffold.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 
@@ -29,10 +30,8 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
-        home: Scaffold(
-            appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
-                YorubaHymnScreen.id, 23.9, 27.1, 184.3, 162.1),
-            body: SingleChildScrollView(
+        home: BaseScaffold(
+            scaffoldBody: SingleChildScrollView(
               child: ListTile(
                 title: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

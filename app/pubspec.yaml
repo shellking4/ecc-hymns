@@ -25,8 +25,10 @@ dependencies:
   dio_cache_interceptor: ^3.2.7
   flutter_html: ^2.2.1
   dio: ^5.1.1
-  flutter_string_encryption: ^0.3.1
   unorm_dart: ^0.2.0
+  persistent_bottom_nav_bar: ^5.0.2
+  fluttertoast: ^8.2.1
+  rxdart: ^0.27.7
 
 dev_dependencies:
   flutter_test:
@@ -39,38 +41,48 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
+    - assets/
+    - assets/fonts/
+    - assets/images/
     - assets/hymnsData.db
 
   fonts:
     - family: Pacifico
       fonts:
-        - asset: fonts/Pacifico/Pacifico-Regular.ttf
+        - asset: assets/fonts/Pacifico/Pacifico-Regular.ttf
 
     - family: Arvo
       fonts:
-        - asset: fonts/Arvo/Arvo-Italic.ttf
+        - asset: assets/fonts/Arvo/Arvo-Italic.ttf
 
     - family: CodaCaption
       fonts:
-        - asset: fonts/CodaCaption/CodaCaption-ExtraBold.ttf
+        - asset: assets/fonts/CodaCaption/CodaCaption-ExtraBold.ttf
 
     - family: Anton
       fonts:
-        - asset: fonts/Anton/Anton-Regular.ttf
+        - asset: assets/fonts/Anton/Anton-Regular.ttf
 
     - family: PermanentMarker
       fonts:
-        - asset: fonts/PermanentMarker/PermanentMarker-Regular.ttf
+        - asset: assets/fonts/PermanentMarker/PermanentMarker-Regular.ttf
 
     - family: Lobster
       fonts:
-        - asset: fonts/Lobster/Lobster-Regular.ttf
+        - asset: assets/fonts/Lobster/Lobster-Regular.ttf
 
     - family: Prata
       fonts:
-        - asset: fonts/Prata/Prata-Regular.ttf
+        - asset: assets/fonts/Prata/Prata-Regular.ttf
 
     - family: Kiwi
       fonts:
-        - asset: fonts/Kiwi_Maru/KiwiMaru-Regular.ttf
+        - asset: assets/fonts/Kiwi_Maru/KiwiMaru-Regular.ttf
+
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/static/Inter-Bold.ttf
+
+    - family: InterRegular
+      fonts:
+        - asset: assets/fonts/Inter/static/Inter-Regular.ttf
