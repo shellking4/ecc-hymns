@@ -14,6 +14,7 @@ const themeColor2 = Color(0xFF1C108A);
 const themeColor3 = Color(0xFF15097B);
 const eccBlue = Color(0xFF006AFF);
 const eccWhiteTheme = Color(0xFFF4F4F4);
+const eccAccentDark = Color(0xFF616161);
 
 const appGradient = BoxDecoration(
   gradient: LinearGradient(
@@ -101,7 +102,6 @@ List<PersistentBottomNavBarItem> navBarsItems(BuildContext context) {
     ),
   ];
 }
-
 
 const kThemeModeKey = '__theme_mode__';
 SharedPreferences? _prefs;

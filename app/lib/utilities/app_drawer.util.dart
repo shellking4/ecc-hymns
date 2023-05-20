@@ -79,13 +79,14 @@ class _AppDrawerState extends State<AppDrawer> {
                       children: [
                         Icon(
                           icon,
+                          size: 16,
                           color: Colors.black,
                         ),
                         SizedBox(width: 20,),
                         Text(
                           title,
                           style: TextStyle(
-                            fontSize: 18.0,
+                            fontSize: 14.0,
                             fontFamily: "Kiwi",
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
