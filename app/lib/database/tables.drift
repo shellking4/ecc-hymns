@@ -1,0 +1,32 @@
+CREATE VIRTUAL TABLE gounHymns 
+USING FTS5(number, title, content);
+
+CREATE VIRTUAL TABLE frHymns 
+USING FTS5(number, title, content);
+
+CREATE VIRTUAL TABLE yrHymns 
+USING FTS5(number, title, content);
+
+CREATE VIRTUAL TABLE enHymns 
+USING FTS5(number, title, content);
+
+CREATE VIRTUAL TABLE hymnPrograms 
+USING FTS5(date, firstHymn, secondHymn, thirdHymn, fourthHymn, fifthHymn, sixthHymn, seventhHymn);
+
+allGounHymns: SELECT * FROM gounHymns;
+
+allFrenchHymns: SELECT * FROM frHymns;
+
+allYorubaHymns: SELECT * FROM yrHymns;
+
+allEnglishHymns: SELECT * FROM enHymns;
+
+allHymnPrograms: SELECT * FROM hymnPrograms;
+
+gounHymnSearchResults ($predicate = TRUE): SELECT * FROM gounHymns WHERE $predicate AND rank MATCH 'bm25(10.1, 16.9, 10.0)' ORDER BY rank;
+
+frenchHymnSearchResults ($predicate = TRUE): SELECT * FROM frHymns WHERE $predicate AND rank MATCH 'bm25(10.1, 16.9, 10.0)' ORDER BY rank;
+
+yorubaHymnSearchResults ($predicate = TRUE): SELECT * FROM yrHymns WHERE $predicate AND rank MATCH 'bm25(10.1, 16.9, 10.0)' ORDER BY rank;
+
+englishHymnSearchResults ($predicate = TRUE): SELECT * FROM enHymns WHERE $predicate AND rank MATCH 'bm25(10.1, 16.9, 10.0)' ORDER BY rank;

@@ -1,7 +1,6 @@
-import 'package:ecchymns/models/yoruba_hymn.model.dart';
+import 'package:ecchymns/database/database.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
-import '../utilities/app_bar.util.dart';
 import '../utilities/base_scaffold.util.dart';
 import 'hymn_item_view.dart';
 
@@ -15,8 +14,8 @@ class YorubaHymnsScreen extends StatefulWidget {
 
 class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
   // ignore: unused_field
-  Future<List<YorubaHymn>>? _yorubaHymns;
-  List<YorubaHymn>? listOfyorubaHymns;
+  Future<List<YrHymn>>? _yorubaHymns;
+  List<YrHymn>? listOfyorubaHymns;
 
   @override
   void initState() {
@@ -39,9 +38,9 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
   }
 
   FutureBuilder yorubaHymnsData() {
-    return FutureBuilder<List<YorubaHymn>>(
+    return FutureBuilder<List<YrHymn>>(
         future: _yorubaHymns,
-        builder: (BuildContext context, AsyncSnapshot<List<YorubaHymn>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<YrHymn>> snapshot) {
           if (snapshot.hasData) {
             listOfyorubaHymns = snapshot.data!;
             return yorubaHymn(listOfyorubaHymns);

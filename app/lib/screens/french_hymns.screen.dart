@@ -1,3 +1,4 @@
+import 'package:ecchymns/database/database.dart';
 import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
@@ -15,8 +16,8 @@ class FrenchHymnsScreen extends StatefulWidget {
 
 class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
   // ignore: unused_field
-  Future<List<FrenchHymn>>? _frenchHymns;
-  List<FrenchHymn>? listOfFrenchHymns;
+  Future<List<FrHymn>>? _frenchHymns;
+  List<FrHymn>? listOfFrenchHymns;
 
   @override
   void initState() {
@@ -39,9 +40,9 @@ class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
   }
 
   FutureBuilder frenchHymnsData() {
-    return FutureBuilder<List<FrenchHymn>>(
+    return FutureBuilder<List<FrHymn>>(
         future: _frenchHymns,
-        builder: (BuildContext context, AsyncSnapshot<List<FrenchHymn>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<List<FrHymn>> snapshot) {
           if (snapshot.hasData) {
             listOfFrenchHymns = snapshot.data!;
             return frenchHymn(listOfFrenchHymns);

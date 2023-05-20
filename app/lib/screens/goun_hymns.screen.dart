@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/goun_hymn.model.dart';
+import '../database/database.dart';
 import '../models/hymns_program.model.dart';
 import '../services/hymns.service.dart';
-import '../utilities/app_bar.util.dart';
 import '../utilities/base_scaffold.util.dart';
-import '../utilities/constants.util.dart';
 import 'hymn_item_view.dart';
 
 class GounHymnsScreen extends StatefulWidget {
