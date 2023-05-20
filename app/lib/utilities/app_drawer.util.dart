@@ -1,7 +1,7 @@
 import 'package:ecchymns/pages/about.page.dart';
 import 'package:ecchymns/pages/home.page.dart';
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'constants.util.dart';
 import 'functions.util.dart';
 
@@ -18,23 +18,39 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      child: Column(
         children: [
           DrawerHeader(
             decoration: BoxDecoration(color: eccWhiteTheme),
-            child: Text("Some text"),
+            child: Center(
+                child: Text(
+              "METATRONICX | Digital Agency",
+              style: TextStyle(fontFamily: "Inter", fontSize: 16, fontWeight: FontWeight.bold),
+            )),
           ),
-          SizedBox(height: 40,),
-          getMenu("A Propos", screen: AboutPage()),
-          getMenu("Partager", screen: HomePage()),
-          getMenu("Quitter", screen: HomePage()),
+          SizedBox(
+            height: 40,
+          ),
+          getMenu("A Propos", screen: AboutPage(), icon: FontAwesomeIcons.circleInfo),
+          getMenu("Partager", screen: HomePage(), icon: FontAwesomeIcons.shareFromSquare),
+          getMenu("Quitter", screen: HomePage(), icon: FontAwesomeIcons.doorOpen),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.all(16),
+              alignment: Alignment.bottomRight,
+              child: Image.asset(
+                "images/log.png",
+                width: 70,
+                height: 70,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget getMenu(String title, {Widget? screen, bool? isActive}) {
+  Widget getMenu(String title, {Widget? screen, bool? isActive, IconData? icon}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
@@ -54,19 +70,29 @@ class _AppDrawerState extends State<AppDrawer> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 ListTile(
-                  onTap: screen != null
-                      ? () {
-                          routeToScreenFromDrawer(context, screen);
-                        }
-                      : null,
-                  title: Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 18.0,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+                    onTap: screen != null
+                        ? () {
+                            routeToScreenFromDrawer(context, screen);
+                          }
+                        : null,
+                    title: Row(
+                      children: [
+                        Icon(
+                          icon,
+                          color: Colors.black,
+                        ),
+                        SizedBox(width: 20,),
+                        Text(
+                          title,
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontFamily: "Kiwi",
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    )),
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 25),
                 ),
