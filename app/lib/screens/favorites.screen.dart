@@ -135,7 +135,7 @@ class _FavoritesItemState extends State<FavoritesItem> {
                     barrierLabel: "favorite_menu",
                     barrierDismissible: true,
                     barrierColor: Colors.black.withOpacity(0.5),
-                    transitionDuration: Duration(milliseconds: 700),
+                    transitionDuration: Duration(milliseconds: 400),
                     context: context,
                     pageBuilder: (context, anim1, anim2) {
                       return Align(

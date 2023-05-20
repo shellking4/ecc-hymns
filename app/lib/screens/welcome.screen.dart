@@ -3,9 +3,11 @@ import 'package:ecchymns/screens/author.screen.dart';
 import 'package:ecchymns/screens/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:page_transition/page_transition.dart';
 
 import '../pages/goun_hymns.page.dart';
 import '../utilities/constants.util.dart';
+import '../utilities/functions.util.dart';
 import 'layout.screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -22,14 +24,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 6);
+    var duration = Duration(seconds: 2);
     return Timer(duration, route);
   }
 
   route() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (BuildContext context) => AuthorScreen()),
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        alignment: Alignment.bottomCenter,
+        child: AuthorScreen(),
+        duration: Duration(milliseconds: 300)
+      ),
       (route) => false,
     );
   }
@@ -61,12 +68,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 Center(
                   child: Text(
                     "ECC CANTIQUES",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w900, 
-                      fontSize: 17, 
-                      fontFamily: "Inter",
-                      color: eccBlue
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.w900, fontSize: 17, fontFamily: "Inter", color: eccBlue),
                   ),
                 ),
               ],

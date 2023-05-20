@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import '../utilities/constants.util.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,12 +19,20 @@ class _AuthorScreenState extends State<AuthorScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 6);
+    var duration = Duration(seconds: 2);
     return Timer(duration, route);
   }
 
   route() {
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LayoutScreen()));
+    Navigator.pushAndRemoveUntil(
+      context,
+      PageTransition(
+        type: PageTransitionType.topToBottom,
+        child: LayoutScreen(),
+        duration: Duration(milliseconds: 500)
+      ),
+      (route) => false,
+    );
   }
 
   @override
