@@ -1,4 +1,5 @@
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
+import 'package:ecchymns/utilities/favorite_menu_dialog.util.dart';
 import 'package:flutter/material.dart';
 import '../utilities/constants.util.dart';
 
@@ -129,7 +130,27 @@ class _FavoritesItemState extends State<FavoritesItem> {
                 ),
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  showGeneralDialog(
+                    barrierLabel: "favorite_menu",
+                    barrierDismissible: true,
+                    barrierColor: Colors.black.withOpacity(0.5),
+                    transitionDuration: Duration(milliseconds: 700),
+                    context: context,
+                    pageBuilder: (context, anim1, anim2) {
+                      return Align(
+                        alignment: Alignment.bottomCenter,
+                        child: FavoriteMenuDialog(),
+                      );
+                    },
+                    transitionBuilder: (context, anim1, anim2, child) {
+                      return SlideTransition(
+                        position: Tween(begin: Offset(0, 1), end: Offset(0, 0)).animate(anim1),
+                        child: child,
+                      );
+                    },
+                  );
+                },
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(175, 4, 0, 0),
                   child: Icon(

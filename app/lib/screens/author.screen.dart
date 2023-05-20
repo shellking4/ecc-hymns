@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
-import '../pages/goun_hymns.page.dart';
 import '../utilities/constants.util.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AuthorScreen extends StatefulWidget {
   static const String id = 'author_screen';
@@ -24,8 +23,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
   }
 
   route() {
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => LayoutScreen()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LayoutScreen()));
   }
 
   @override
@@ -44,12 +42,24 @@ class _AuthorScreenState extends State<AuthorScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Center(
-                  child: Text(
-                    "ECC CANTIQUES",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontFamily: "InterRegular",
-                      color: eccWhiteTheme
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 9),
+                    child: Text(
+                      "ECC CANTIQUES",
+                      style: TextStyle(fontSize: 17, fontFamily: "InterRegular", color: eccWhiteTheme),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: (isPortrait) ? 0.0 : 200.0,
+                  width: (isPortrait) ? 30 : 176,
+                ),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                  child: Center(
+                    child: Text(
+                      "BROUGHT TO YOU BY",
+                      style: TextStyle(fontSize: 15, fontFamily: "InterRegular", color: eccWhiteTheme),
                     ),
                   ),
                 ),
@@ -58,32 +68,50 @@ class _AuthorScreenState extends State<AuthorScreen> {
                   width: (isPortrait) ? 30 : 176,
                 ),
                 Center(
-                  child: Text(
-                    "BY",
-                    style: TextStyle(
-                      fontSize: 15, 
-                      fontFamily: "InterRegular",
-                      color: eccWhiteTheme
+                  child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    TextButton(
+                      onPressed: launchDonaldTwitterUrl,
+                      child: Text(
+                        "Donald",
+                        style: TextStyle(fontSize: 15, fontFamily: "InterRegular", color: Color.fromARGB(255, 194, 188, 188)),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: (isPortrait) ? 0.0 : 200.0,
-                  width: (isPortrait) ? 30 : 176,
-                ),
-                Center(
-                  child: Text(
-                    "METATRONICX",
-                    style: TextStyle(
-                      fontSize: 15, 
-                      fontFamily: "InterRegular",
-                      color: eccWhiteTheme
+                    SizedBox(
+                      width: 3,
                     ),
-                  ),
+                    Text(
+                      "and",
+                      style: TextStyle(fontSize: 15, fontFamily: "InterRegular", color: eccWhiteTheme),
+                    ),
+                    SizedBox(
+                      width: 3,
+                    ),
+                    TextButton(
+                      onPressed: launchGerryTwitterUrl,
+                      child: Text(
+                        "Gerry",
+                        style: TextStyle(fontSize: 15, fontFamily: "InterRegular", color: Color.fromARGB(255, 203, 197, 197)),
+                      ),
+                    ),
+                  ]),
                 ),
               ],
             ),
           ),
         ));
+  }
+
+  Future<void> launchGerryTwitterUrl() async {
+    var gerryTwitter = Uri.parse("http://someUrl");
+    if (!await launchUrl(gerryTwitter)) {
+      throw Exception('Could not launch $gerryTwitter');
+    }
+  }
+
+  Future<void> launchDonaldTwitterUrl() async {
+    var donaldTwitter = Uri.parse("http://someUrl");
+    if (!await launchUrl(donaldTwitter)) {
+      throw Exception('Could not launch $donaldTwitter');
+    }
   }
 }
