@@ -31,8 +31,6 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        appBar: MyAppBar.getAppBar(context, setAppBarTitle(),
-            YorubaHymnsScreen.id, 36.3, 38.0, 184.3, 196.1),
         scaffoldBody: Stack(
           children: <Widget>[
             yorubaHymnsData(),

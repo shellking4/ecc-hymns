@@ -1,3 +1,4 @@
+import 'package:ecchymns/screens/favorites.screen.dart';
 import 'package:ecchymns/screens/home.screen.dart';
 import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class EccHymns extends StatelessWidget {
       home: LayoutScreen(),
       routes: {
         HomeScreen.id: (context) => HomeScreen(),
+        FavoritesScreen.id: (context) => FavoritesScreen(),
         WelcomeScreen.id: (context) => WelcomeScreen(),
         GounHymnsScreen.id: (context) => GounHymnsScreen(),
         GounHymnScreen.id: (context) => GounHymnScreen(),

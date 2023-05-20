@@ -18,18 +18,14 @@ class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: eccBlue,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
+        padding: EdgeInsets.zero,
         children: [
-          Padding(
-            padding: EdgeInsets.only(top: 100, left: 50, bottom: 100),
-            child: Image.asset(
-              'images/ecc-logo.png',
-              height: 80,
-              width: 80,
-            ),
+          DrawerHeader(
+            decoration: BoxDecoration(color: eccWhiteTheme),
+            child: Text("Some text"),
           ),
+          SizedBox(height: 40,),
           getMenu("A Propos", screen: AboutPage()),
           getMenu("Partager", screen: HomePage()),
           getMenu("Quitter", screen: HomePage()),
@@ -67,13 +63,12 @@ class _AppDrawerState extends State<AppDrawer> {
                     title,
                     style: TextStyle(
                       fontSize: 18.0,
-                      color: Colors.white.withOpacity(0.75),
+                      color: Colors.black,
                     ),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 25),
-                  child: Divider(color: Colors.white.withOpacity(0.65)),
                 ),
               ],
             ),

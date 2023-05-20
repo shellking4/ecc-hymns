@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ecchymns/screens/author.screen.dart';
 import 'package:ecchymns/screens/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -28,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   route() {
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (BuildContext context) => LayoutScreen()),
+      MaterialPageRoute(builder: (BuildContext context) => AuthorScreen()),
       (route) => false,
     );
   }
