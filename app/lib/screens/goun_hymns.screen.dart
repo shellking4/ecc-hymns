@@ -3,7 +3,7 @@ import '../database/database.dart';
 import '../models/hymns_program.model.dart';
 import '../services/hymns.service.dart';
 import '../utilities/base_scaffold.util.dart';
-import 'hymn_item_view.dart';
+import '../utilities/hymn_item.util.dart';
 
 class GounHymnsScreen extends StatefulWidget {
   static const String id = 'goun_hymns_screen';
@@ -66,13 +66,16 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
         });
   }
 
-  ListView gounHymn(data) {
-    var hymnItemView = HymnItemView();
-    return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        return Card(child: hymnItemView.buildHymnItemView(context, data, index));
-      },
+  Widget gounHymn(data) {
+    var hymnItemView = HymnItem();
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
+      child: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return hymnItemView.buildHymnItemView(context, data, index);
+        },
+      ),
     );
   }
 }

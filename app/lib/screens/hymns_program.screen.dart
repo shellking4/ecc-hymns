@@ -1,6 +1,7 @@
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
+import '../database/database.dart';
 import '../services/hymns.service.dart';
 
 class HymnsProgramScreen extends StatefulWidget {

@@ -41,45 +41,48 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     decoration: BoxDecoration(
                       color: Color(0xFFF4F4F4),
                     ),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Column(
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 5),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsetsDirectional.fromSTEB(8, 40, 30, 2),
-                                          child: Text(
-                                            'MES FAVORIS',
-                                            style: TextStyle(fontSize: 18, fontFamily: "Inter", color: Colors.black),
+                    child: Padding(
+                      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 40),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Column(
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 5),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsetsDirectional.fromSTEB(8, 40, 30, 2),
+                                            child: Text(
+                                              'MES FAVORIS',
+                                              style: TextStyle(fontSize: 18, fontFamily: "Inter", color: Colors.black),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                thickness: 0.3,
-                                indent: 40,
-                                endIndent: 50,
-                                color: FlutterFlowTheme.of(context).secondaryText,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 18,
-                          ),
-                          ...[for (var i = 1; i <= 10; i++) i].map((e) => FavoritesItem()).toList()
-                        ],
+                                  ],
+                                ),
+                                Divider(
+                                  thickness: 0.3,
+                                  indent: 40,
+                                  endIndent: 50,
+                                  color: FlutterFlowTheme.of(context).secondaryText,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 18,
+                            ),
+                            ...[for (var i = 1; i <= 10; i++) i].map((e) => FavoritesItem()).toList()
+                          ],
+                        ),
                       ),
                     ),
                   ),

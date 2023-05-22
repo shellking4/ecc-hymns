@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 import '../database/database.dart';
 
 class HymnsService {
-  static EccHymnsDb db = EccHymnsDb();
+  static HymnsDb db = HymnsDb();
 
   static Future<List<GounHymn>> getAllGounHymns() async {
     return db.allGounHymns().get();
@@ -21,7 +21,12 @@ class HymnsService {
   }
 
   static Future<List<HymnProgram>> getAllHymnsProgram() async {
-    return db.allHymnPrograms().get();
+    try {
+      return db.allHymnPrograms().get();
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   static Future<List<GounHymn>> getGounHymnSearchResults(String searchQuery) {

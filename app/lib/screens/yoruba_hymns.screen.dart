@@ -2,7 +2,7 @@ import 'package:ecchymns/database/database.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
 import '../utilities/base_scaffold.util.dart';
-import 'hymn_item_view.dart';
+import '../utilities/hymn_item.util.dart';
 
 class YorubaHymnsScreen extends StatefulWidget {
   static const String id = 'yoruba_hymns_screen';
@@ -53,14 +53,16 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
         });
   }
 
-  ListView yorubaHymn(data) {
-    var hymnItemView = HymnItemView();
-    return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        return Card(
-            child: hymnItemView.buildHymnItemView(context, data, index));
-      },
+  Widget yorubaHymn(data) {
+    var hymnItemView = HymnItem();
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
+      child: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return hymnItemView.buildHymnItemView(context, data, index);
+        },
+      ),
     );
   }
 }

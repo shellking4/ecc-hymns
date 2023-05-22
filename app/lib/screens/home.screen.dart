@@ -1,10 +1,9 @@
 import 'package:ecchymns/screens/french_hymns.screen.dart';
 import 'package:ecchymns/screens/goun_hymns.screen.dart';
-import 'package:ecchymns/screens/yoruba_hymn.screen.dart';
+import 'package:ecchymns/screens/hymns_program.screen.dart';
 import 'package:ecchymns/screens/yoruba_hymns.screen.dart';
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
-import '../utilities/constants.util.dart';
 import '../utilities/home_menu_item.util.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -73,6 +72,10 @@ class _HomeScreenState extends State<HomeScreen> {
                           HomeMenuItem(
                             menuTitle: 'CANTIQUES ÉVÉ',
                             targetScreen: YorubaHymnsScreen(),
+                          ),
+                          HomeMenuItem(
+                            menuTitle: 'PROGRAMMES CANTIQUES',
+                            targetScreen: HymnsProgramScreen(),
                           ),
                         ],
                       ),

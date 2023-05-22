@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
 import '../utilities/app_bar.util.dart';
 import '../utilities/base_scaffold.util.dart';
-import 'hymn_item_view.dart';
+import '../utilities/hymn_item.util.dart';
 
 class FrenchHymnsScreen extends StatefulWidget {
   static const String id = 'french_hymns_screen';
@@ -58,14 +58,16 @@ class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
         });
   }
 
-  ListView frenchHymn(data) {
-    var hymnItemView = HymnItemView();
-    return ListView.builder(
-      itemCount: data.length,
-      itemBuilder: (context, index) {
-        return Card(
-            child: hymnItemView.buildHymnItemView(context, data, index));
-      },
+  Widget frenchHymn(data) {
+    var hymnItem = HymnItem();
+    return Padding(
+      padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
+      child: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return hymnItem.buildHymnItemView(context, data, index);
+        },
+      ),
     );
   }
 }

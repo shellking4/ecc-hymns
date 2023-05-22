@@ -1,14 +1,8 @@
 import 'dart:async';
 import 'package:ecchymns/screens/author.screen.dart';
-import 'package:ecchymns/screens/home.screen.dart';
 import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:page_transition/page_transition.dart';
-
-import '../pages/goun_hymns.page.dart';
 import '../utilities/constants.util.dart';
-import '../utilities/functions.util.dart';
-import 'layout.screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String id = 'welcome_screen';

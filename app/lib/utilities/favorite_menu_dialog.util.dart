@@ -116,7 +116,9 @@ class _FavoriteMenuDialogState extends State<FavoriteMenuDialog> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text(
                     'Fermer',
                     textAlign: TextAlign.center,

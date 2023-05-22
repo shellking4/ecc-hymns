@@ -1,6 +1,8 @@
 import 'package:ecchymns/utilities/functions.util.dart';
 import 'package:flutter/material.dart';
 
+import 'constants.util.dart';
+
 class HomeMenuItem extends StatefulWidget {
   final String menuTitle;
   final Widget targetScreen;
@@ -25,7 +27,7 @@ class _HomeMenuItemState extends State<HomeMenuItem> {
             width: 100,
             height: 5,
             decoration: BoxDecoration(
-              color: Color(0xFF006AFF),
+              color: eccBlue,
             ),
           ),
         ),

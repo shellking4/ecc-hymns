@@ -1,7 +1,7 @@
-import 'package:ecchymns/pages/about.page.dart';
-import 'package:ecchymns/pages/home.page.dart';
+import 'package:ecchymns/screens/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../screens/about.screen.dart';
 import 'constants.util.dart';
 import 'functions.util.dart';
 
@@ -31,9 +31,9 @@ class _AppDrawerState extends State<AppDrawer> {
           SizedBox(
             height: 40,
           ),
-          getMenu("A Propos", screen: AboutPage(), icon: FontAwesomeIcons.circleInfo),
-          getMenu("Partager", screen: HomePage(), icon: FontAwesomeIcons.shareFromSquare),
-          getMenu("Quitter", screen: HomePage(), icon: FontAwesomeIcons.doorOpen),
+          getMenu("A Propos", screen: AboutScreen(), icon: FontAwesomeIcons.circleInfo),
+          getMenu("Partager", screen: HomeScreen(), icon: FontAwesomeIcons.shareFromSquare),
+          getMenu("Quitter", screen: HomeScreen(), icon: FontAwesomeIcons.doorOpen),
           Expanded(
             child: Container(
               padding: EdgeInsets.all(16),

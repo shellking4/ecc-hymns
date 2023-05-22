@@ -2,9 +2,6 @@ import 'package:ecchymns/screens/favorites.screen.dart';
 import 'package:ecchymns/screens/home.screen.dart';
 import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
-import 'pages/french_hymns.page.dart';
-import 'pages/goun_hymns.page.dart';
-import 'pages/yoruba_hymns.page.dart';
 import 'screens/about.screen.dart';
 import 'screens/french_hymn.screen.dart';
 import 'screens/french_hymns.screen.dart';
@@ -25,7 +22,7 @@ class EccHymns extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
+          scaffoldBackgroundColor: Colors.white, primaryColor: eccBlue),
       initialRoute: WelcomeScreen.id,
       home: LayoutScreen(),
       routes: {
@@ -39,11 +36,8 @@ class EccHymns extends StatelessWidget {
         SearchSreen.id: (context) => SearchSreen(),
         AboutScreen.id: (context) => AboutScreen(),
         HymnsProgramScreen.id: (context) => HymnsProgramScreen(),
-        GounHymnsPage.id: (context) => GounHymnsPage(),
-        FrenchHymnsPage.id: (context) => FrenchHymnsPage(),
         YorubaHymnsScreen.id: (context) => YorubaHymnsScreen(),
         YorubaHymnScreen.id: (context) => YorubaHymnScreen(),
-        YorubaHymnsPage.id: (context) => YorubaHymnsPage(),
       },
     );
   }

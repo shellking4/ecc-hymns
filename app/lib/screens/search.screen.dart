@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utilities/app_bar.util.dart';
-import 'hymn_item_view.dart';
+import '../utilities/hymn_item.util.dart';
 
 // ignore: must_be_immutable
 class SearchSreen extends StatelessWidget {
@@ -46,7 +46,7 @@ class SearchSreen extends StatelessWidget {
           onSearch: search,
           minimumChars: 1,
           onItemFound: (hymn, int index) {
-            var hymnItemView = HymnItemView(hymnItem: hymn);
+            var hymnItemView = HymnItem(hymnItem: hymn);
             return hymnItemView.buildHymnItemView(context, null, null);
           },
           loader: Center(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../utilities/app_menu.util.dart';
 import '../utilities/base_scaffold.util.dart';
 
 // ignore: must_be_immutable
