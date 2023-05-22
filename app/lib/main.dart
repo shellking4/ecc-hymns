@@ -16,7 +16,6 @@ import 'screens/welcome.screen.dart';
 import 'screens/yoruba_hymn.screen.dart';
 import 'screens/yoruba_hymns.screen.dart';
 import 'utilities/constants.util.dart';
-import 'utilities/custom_drawer.util.dart';
 
 void main() => runApp(EccHymns());
 

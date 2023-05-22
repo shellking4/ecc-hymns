@@ -1,4 +1,3 @@
-import 'package:ecchymns/database/database.dart';
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
@@ -37,6 +36,8 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
         scaffoldBody: FutureBuilder<List<HymnProgram>>(
             future: _hymnsPrograms,
             builder: (BuildContext context, AsyncSnapshot<List<HymnProgram>> snapshot) {
+              print(snapshot.hasData);
+              print(snapshot.hasError);
               if (snapshot.hasData) {
                 listOfHymnPrograms = snapshot.data!;
                 return SingleChildScrollView(
@@ -48,43 +49,61 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                           dividerColor: Color(0xFF29434e),
                         ),
                         child: DataTable(
-                          showBottomBorder: true,
-                          showCheckboxColumn: false,
-                          dividerThickness: 2.0,
-                          horizontalMargin: 10,
-                          columns: [
-                            DataColumn(
-                                label: Text(
-                              "DATES",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontFamily: "Kiwi", fontSize: 15.0, fontWeight: FontWeight.bold),
-                            )),
-                            DataColumn(
-                              label: EasyRichText(
-                                first,
-                                patternList: [
-                                  EasyRichTextPattern(
-                                    targetString: 'st',
-                                    superScript: true,
-                                    stringBeforeTarget: '1',
-                                    matchWordBoundaries: false,
-                                    style: TextStyle(
-                                        fontFamily: "Kiwi",
-                                        fontSize: 15.0,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                            showBottomBorder: true,
+                            showCheckboxColumn: false,
+                            dividerThickness: 2.0,
+                            horizontalMargin: 10,
+                            columns: [
+                              DataColumn(
+                                  label: Text(
+                                "DATES",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontFamily: "Kiwi", fontSize: 15.0, fontWeight: FontWeight.bold),
+                              )),
+                              DataColumn(
+                                label: EasyRichText(
+                                  first,
+                                  patternList: [
+                                    EasyRichTextPattern(
+                                      targetString: 'st',
+                                      superScript: true,
+                                      stringBeforeTarget: '1',
+                                      matchWordBoundaries: false,
+                                      style: TextStyle(
+                                          fontFamily: "Kiwi",
+                                          fontSize: 15.0,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                            DataColumn(
-                              label: EasyRichText(
-                                second,
+                              DataColumn(
+                                label: EasyRichText(
+                                  second,
+                                  patternList: [
+                                    EasyRichTextPattern(
+                                      targetString: 'nd',
+                                      superScript: true,
+                                      stringBeforeTarget: '2',
+                                      matchWordBoundaries: false,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Kiwi",
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              DataColumn(
+                                  label: EasyRichText(
+                                third,
                                 patternList: [
                                   EasyRichTextPattern(
-                                    targetString: 'nd',
+                                    targetString: 'rd',
                                     superScript: true,
-                                    stringBeforeTarget: '2',
+                                    stringBeforeTarget: '3',
                                     matchWordBoundaries: false,
                                     style: TextStyle(
                                         color: Colors.black,
@@ -93,165 +112,152 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ],
-                              ),
-                            ),
-                            DataColumn(
-                                label: EasyRichText(
-                              third,
-                              patternList: [
-                                EasyRichTextPattern(
-                                  targetString: 'rd',
-                                  superScript: true,
-                                  stringBeforeTarget: '3',
-                                  matchWordBoundaries: false,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Kiwi",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                            DataColumn(
-                                label: EasyRichText(
-                              fourth,
-                              patternList: [
-                                EasyRichTextPattern(
-                                  targetString: 'th',
-                                  superScript: true,
-                                  stringBeforeTarget: '4',
-                                  matchWordBoundaries: false,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Kiwi",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                            DataColumn(
-                                label: EasyRichText(
-                              fifth,
-                              patternList: [
-                                EasyRichTextPattern(
-                                  targetString: 'th',
-                                  superScript: true,
-                                  stringBeforeTarget: '5',
-                                  matchWordBoundaries: false,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Kiwi",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                            DataColumn(
-                                label: EasyRichText(
-                              sixth,
-                              patternList: [
-                                EasyRichTextPattern(
-                                  targetString: 'th',
-                                  superScript: true,
-                                  stringBeforeTarget: '6',
-                                  matchWordBoundaries: false,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Kiwi",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            )),
-                            DataColumn(
-                                label: EasyRichText(
-                              seventh,
-                              patternList: [
-                                EasyRichTextPattern(
-                                  targetString: 'th',
-                                  superScript: true,
-                                  stringBeforeTarget: '7',
-                                  matchWordBoundaries: false,
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontFamily: "Kiwi",
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ))
-                          ],
-                          rows: listOfHymnPrograms != null
-                              ? listOfHymnPrograms!.map((hymnProgram) {
-                                  var index = listOfHymnPrograms!.indexOf(hymnProgram);
-                                  return DataRow(
-                                      color: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                                        if (states.contains(MaterialState.selected)) {
-                                          return Theme.of(context).colorScheme.primary.withOpacity(0.3);
-                                        }
-                                        return Colors.white;
-                                      }),
-                                      cells: [
-                                        DataCell(Text(
-                                          hymnProgram.date,
-                                          style: TextStyle(fontFamily: "Kiwi", fontSize: 14.0, fontWeight: FontWeight.bold),
-                                        )),
-                                        DataCell(Text(hymnProgram.firstHymn,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                        DataCell(Text(hymnProgram.secondHymn,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                        DataCell(Text(hymnProgram.thirdHymn,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                        DataCell(Text(hymnProgram.fourthHymn,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                        DataCell(Text(hymnProgram.fifthHymn,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                        DataCell(Text(hymnProgram.sixthHymn,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                        DataCell(Text(hymnProgram.seventhHymn,
-                                          style: TextStyle(
-                                            fontFamily: "Kiwi",
-                                            fontSize: 12.0,
-                                          ),
-                                        )),
-                                      ],
-                                      selected: index == selectedIndex,
-                                      onSelectChanged: (val) {
-                                        setState(() {
-                                          selectedIndex = index;
-                                        });
-                                      });
-                                }).toList()
-                              : [],
-                        ),
+                              )),
+                              DataColumn(
+                                  label: EasyRichText(
+                                fourth,
+                                patternList: [
+                                  EasyRichTextPattern(
+                                    targetString: 'th',
+                                    superScript: true,
+                                    stringBeforeTarget: '4',
+                                    matchWordBoundaries: false,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "Kiwi",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                              DataColumn(
+                                  label: EasyRichText(
+                                fifth,
+                                patternList: [
+                                  EasyRichTextPattern(
+                                    targetString: 'th',
+                                    superScript: true,
+                                    stringBeforeTarget: '5',
+                                    matchWordBoundaries: false,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "Kiwi",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                              DataColumn(
+                                  label: EasyRichText(
+                                sixth,
+                                patternList: [
+                                  EasyRichTextPattern(
+                                    targetString: 'th',
+                                    superScript: true,
+                                    stringBeforeTarget: '6',
+                                    matchWordBoundaries: false,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "Kiwi",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              )),
+                              DataColumn(
+                                  label: EasyRichText(
+                                seventh,
+                                patternList: [
+                                  EasyRichTextPattern(
+                                    targetString: 'th',
+                                    superScript: true,
+                                    stringBeforeTarget: '7',
+                                    matchWordBoundaries: false,
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontFamily: "Kiwi",
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ))
+                            ],
+                            rows: listOfHymnPrograms!.map((hymnProgram) {
+                              var index = listOfHymnPrograms!.indexOf(hymnProgram);
+                              return DataRow(
+                                  color: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
+                                    if (states.contains(MaterialState.selected)) {
+                                      return Theme.of(context).colorScheme.primary.withOpacity(0.3);
+                                    }
+                                    return Colors.white;
+                                  }),
+                                  cells: [
+                                    DataCell(Text(
+                                      hymnProgram.date,
+                                      style: TextStyle(fontFamily: "Kiwi", fontSize: 14.0, fontWeight: FontWeight.bold),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.firstHymn,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.secondHymn,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.thirdHymn,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.fourthHymn,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.fifthHymn,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.sixthHymn,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                    DataCell(Text(
+                                      hymnProgram.seventhHymn,
+                                      style: TextStyle(
+                                        fontFamily: "Kiwi",
+                                        fontSize: 12.0,
+                                      ),
+                                    )),
+                                  ],
+                                  selected: index == selectedIndex,
+                                  onSelectChanged: (val) {
+                                    setState(() {
+                                      selectedIndex = index;
+                                    });
+                                  });
+                            }).toList()),
                       )),
                 );
               } else if (snapshot.hasError) {
+                print(snapshot.error);
                 return Center(
                   child: Text("Veuillez patienter pendant que nous mettons les choses en place",
                       style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0)),

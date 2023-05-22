@@ -1,7 +1,5 @@
-import 'package:ecchymns/pages/french_hymns.page.dart';
-import 'package:ecchymns/pages/goun_hymns.page.dart';
-import 'package:ecchymns/pages/hymns_programs.page.dart';
 import 'package:ecchymns/screens/home.screen.dart';
+import 'package:ecchymns/screens/hymns_program.screen.dart';
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:ecchymns/utilities/constants.util.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,16 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import "package:persistent_bottom_nav_bar/persistent_tab_view.dart";
 import 'package:fluttertoast/fluttertoast.dart';
-import '../pages/home.page.dart';
 import '../utilities/app_bar.util.dart';
-import '../utilities/app_drawer.util.dart';
+import 'favorites.screen.dart';
 
 class LayoutScreen extends StatefulWidget {
   static String id = 'layout_screen';
-  LayoutScreen({Key? key, this.screenIndex = 0, this.initialScreen = const HomeScreen()}) : super(key: key);
-
+  LayoutScreen({Key? key, this.screenIndex = 0, this.initialScreen = const HomeScreen(), this.previousRoute}) : super(key: key);
   final int screenIndex;
   final Widget initialScreen;
+  final String? previousRoute;
 
   @override
   _LayoutScreenState createState() => _LayoutScreenState();
@@ -42,6 +39,16 @@ class _LayoutScreenState extends State<LayoutScreen> {
     return "Accueil";
   }
 
+  void onTabTap(int index) {
+  if (index == 0) {
+    PersistentNavBarNavigator.pushNewScreen(
+      context,
+      screen: LayoutScreen(initialScreen: HymnsProgramScreen(),),
+      withNavBar: true,
+    );
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     PersistentTabController controller = PersistentTabController(initialIndex: 0);
@@ -51,9 +58,12 @@ class _LayoutScreenState extends State<LayoutScreen> {
         onWillPop: onWillPop,
         child: Stack(children: <Widget>[
           PersistentTabView(
+            onItemSelected: (int index) {
+              onTabTap(index);
+            },
             context,
             controller: controller,
-            screens: buildScreens(),
+            screens: buildScreens(initialScreen: widget.initialScreen),
             items: navBarsItems(context),
             confineInSafeArea: true,
             backgroundColor: Colors.white,
@@ -85,6 +95,73 @@ class _LayoutScreenState extends State<LayoutScreen> {
       ),
     );
   }
+
+  List<Widget> buildScreens({Widget initialScreen = const HomeScreen(), String? previousRoute}) {
+  return [initialScreen, HomeScreen(), FavoritesScreen()];
+}
+
+List<PersistentBottomNavBarItem> navBarsItems(BuildContext context) {
+  return [
+    PersistentBottomNavBarItem(
+      iconSize: iconSize,
+      icon: Image.asset(
+        "assets/images/pro.png",
+        color: eccBlue,
+        width: 55,
+        height: 55,
+      ),
+      inactiveIcon: Image.asset(
+        "assets/images/pro.png",
+        color: CupertinoColors.systemGrey,
+        width: 55,
+        height: 55,
+      ),
+      title: "Programmes",
+      textStyle: TextStyle(fontFamily: "Kiwi", color: Colors.black, fontSize: 11.0),
+      activeColorPrimary: eccBlue,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+    PersistentBottomNavBarItem(
+      iconSize: iconSize,
+      icon: Image.asset(
+        "assets/images/home.png",
+        color: eccBlue,
+        width: 55,
+        height: 55,
+      ),
+      inactiveIcon: Image.asset(
+        "assets/images/home.png",
+        color: CupertinoColors.systemGrey,
+        width: 55,
+        height: 55,
+      ),
+      title: "Accueil",
+      textStyle: TextStyle(fontFamily: "Kiwi", fontSize: 11.0),
+      activeColorPrimary: Colors.white,
+      activeColorSecondary: eccBlue,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+    PersistentBottomNavBarItem(
+      iconSize: iconSize,
+      icon: Image.asset(
+        "assets/images/favori.png",
+        color: eccBlue,
+        width: 55,
+        height: 52,
+      ),
+      inactiveIcon: Image.asset(
+        "assets/images/favori.png",
+        color: CupertinoColors.systemGrey,
+        width: 55,
+        height: 52,
+      ),
+      title: "Favoris",
+      textStyle: TextStyle(fontFamily: "Kiwi", fontSize: 11.0),
+      activeColorPrimary: eccBlue,
+      inactiveColorPrimary: CupertinoColors.systemGrey,
+    ),
+  ];
+}
 
   // ignore: missing_return
 

@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 2);
+    var duration = Duration(seconds: 6);
     return Timer(duration, route);
   }
 
@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         type: PageTransitionType.rightToLeft,
         alignment: Alignment.bottomCenter,
         child: AuthorScreen(),
-        duration: Duration(milliseconds: 300)
+        duration: Duration(milliseconds: 500)
       ),
       (route) => false,
     );
@@ -57,7 +57,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Image.asset(
-                  'images/ecc-logo.png',
+                  'assets/images/ecc-logo.png',
                   height: 130,
                   width: 130,
                 ),

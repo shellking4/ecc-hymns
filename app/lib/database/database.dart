@@ -12,9 +12,8 @@ LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
     final file = File(p.join(dbFolder.path, 'app.db'));
-
     if (!await file.exists()) {
-      // Extract the existing database file from dataFiles
+      // Extract the pre-populated database file from assets
       final blob = await rootBundle.load('assets/hymnsData.db');
       final blobBuffer = blob.buffer;
       await file.writeAsBytes(blobBuffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
@@ -23,11 +22,12 @@ LazyDatabase _openConnection() {
   });
 }
 
+
 @DriftDatabase(
   include: {'tables.drift'},
 )
-class EccHymnsDb extends _$EccHymnsDb {
-  EccHymnsDb() : super(_openConnection());
+class HymnsDb extends _$HymnsDb {
+  HymnsDb() : super(_openConnection());
 
   @override
   int get schemaVersion => 2;

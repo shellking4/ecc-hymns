@@ -1,13 +1,7 @@
-import 'package:ecchymns/screens/favorites.screen.dart';
-import 'package:ecchymns/screens/goun_hymns.screen.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../pages/french_hymns.page.dart';
-import '../pages/goun_hymns.page.dart';
-import '../screens/home.screen.dart';
 
 const themeColor1 = Color(0xFF318CE7);
 const themeColor2 = Color(0xFF1C108A);
@@ -52,56 +46,6 @@ const appBarDecoration = BoxDecoration(
     end: Alignment.topRight,
   ),
 );
-
-List<Widget> buildScreens({
-  Widget homeScreenReplacement = const HomeScreen(),
-}) {
-  return [homeScreenReplacement, GounHymnsScreen(), FavoritesScreen()];
-}
-
-List<PersistentBottomNavBarItem> navBarsItems(BuildContext context) {
-  return [
-    PersistentBottomNavBarItem(
-      iconSize: iconSize,
-      icon: Image.asset(
-        "images/pro.png",
-        color: eccBlue,
-        width: 55,
-        height: 55,
-      ),
-      title: "Programmes",
-      textStyle: TextStyle(fontFamily: "Kiwi", color: Colors.black, fontSize: 11.0),
-      activeColorPrimary: eccBlue,
-      inactiveColorPrimary: CupertinoColors.systemGrey,
-    ),
-    PersistentBottomNavBarItem(
-      iconSize: iconSize,
-      icon: Image.asset(
-        "images/home.png",
-        color: eccBlue,
-        width: 55,
-        height: 55,
-      ),
-      title: "Accueil",
-      textStyle: TextStyle(fontFamily: "Kiwi", fontSize: 11.0),
-      activeColorPrimary: Colors.white,
-      inactiveColorPrimary: CupertinoColors.systemGrey,
-    ),
-    PersistentBottomNavBarItem(
-      iconSize: iconSize,
-      icon: Image.asset(
-        "images/favori.png",
-        color: eccBlue,
-        width: 55,
-        height: 52,
-      ),
-      title: "Favoris",
-      textStyle: TextStyle(fontFamily: "Kiwi", fontSize: 11.0),
-      activeColorPrimary: Colors.white,
-      inactiveColorPrimary: CupertinoColors.systemGrey,
-    ),
-  ];
-}
 
 const kThemeModeKey = '__theme_mode__';
 SharedPreferences? _prefs;

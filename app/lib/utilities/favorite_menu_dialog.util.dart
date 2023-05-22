@@ -31,7 +31,7 @@ class _FavoriteMenuDialogState extends State<FavoriteMenuDialog> {
                 ),
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: TextButton(
                   onPressed: () {},
                   child: Text(
@@ -60,7 +60,7 @@ class _FavoriteMenuDialogState extends State<FavoriteMenuDialog> {
                 borderRadius: BorderRadius.circular(0),
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: TextButton(
                   onPressed: () {},
                   child: TextButton(
@@ -114,7 +114,7 @@ class _FavoriteMenuDialogState extends State<FavoriteMenuDialog> {
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 10),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                 child: TextButton(
                   onPressed: () {},
                   child: Text(

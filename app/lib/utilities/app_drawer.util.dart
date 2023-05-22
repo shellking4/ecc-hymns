@@ -39,7 +39,7 @@ class _AppDrawerState extends State<AppDrawer> {
               padding: EdgeInsets.all(16),
               alignment: Alignment.bottomRight,
               child: Image.asset(
-                "images/log.png",
+                "assets/images/log.png",
                 width: 70,
                 height: 70,
               ),

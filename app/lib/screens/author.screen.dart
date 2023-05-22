@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:ecchymns/screens/home.screen.dart';
 import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -19,7 +20,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 2);
+    var duration = Duration(seconds: 6);
     return Timer(duration, route);
   }
 
