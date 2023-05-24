@@ -21,23 +21,19 @@ class _FavoritesItemState extends State<FavoritesItem> {
     if (hymn is GounHymn) {
       await HymnsService.removeFavoriteGounHymn(widget.hymn.number);
     } else if (hymn is FrHymn) {
-      await HymnsService.removeFavoriteFrenchHymn(widget.hymn.number);
+      HymnsService.removeFavoriteFrenchHymn(widget.hymn.number);
     } else if (hymn is YrHymn) {
       await HymnsService.removeFavoriteYorubaHymn(widget.hymn.number);
     }
-    return;
   }
 
   removeHymnFromFavorite() async {
     await removeFavorite(widget.hymn);
     widget.reloadFavorites();
-    return;
   }
 
   removeAllFavoriteHymns() async {
-    for (dynamic hymn in widget.favoriteHymns) {
-      await removeFavorite(hymn);
-    }
+    await HymnsService.removeFavorites();
     widget.reloadFavorites();
   }
 
@@ -65,7 +61,7 @@ class _FavoritesItemState extends State<FavoritesItem> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -124,8 +120,8 @@ class _FavoritesItemState extends State<FavoritesItem> {
           ),
           Divider(
             thickness: 0.3,
-            indent: 40,
-            endIndent: 24,
+            indent: 15,
+            endIndent: 20,
             color: FlutterFlowTheme.of(context).secondaryText,
           ),
         ],

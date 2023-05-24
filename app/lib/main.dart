@@ -32,7 +32,7 @@ class EccHymns extends StatelessWidget {
         GounHymnsScreen.id: (context) => GounHymnsScreen(),
         GounHymnScreen.id: (context) => GounHymnScreen(),
         FrenchHymnsScreen.id: (context) => FrenchHymnsScreen(),
-        FrenchHymnScreen.id: (conetxt) => FrenchHymnScreen(),
+        FrenchHymnScreen.id: (context) => FrenchHymnScreen(),
         SearchSreen.id: (context) => SearchSreen(),
         AboutScreen.id: (context) => AboutScreen(),
         HymnsProgramScreen.id: (context) => HymnsProgramScreen(),

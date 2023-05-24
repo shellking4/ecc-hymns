@@ -69,10 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             menuTitle: 'CANTIQUES YORUBA',
                             targetScreen: YorubaHymnsScreen(),
                           ),
-                          HomeMenuItem(
-                            menuTitle: 'CANTIQUES ÉVÉ',
-                            targetScreen: YorubaHymnsScreen(),
-                          ),
+                          // HomeMenuItem(
+                          //   menuTitle: 'CANTIQUES ÉVÉ',
+                          //   targetScreen: YorubaHymnsScreen(),
+                          // ),
                           HomeMenuItem(
                             menuTitle: 'PROGRAMMES CANTIQUES',
                             targetScreen: HymnsProgramScreen(),

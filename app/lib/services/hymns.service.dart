@@ -104,8 +104,10 @@ class HymnsService {
     return await db.setFavoriteYorubaHymn(hymnNumber);
   }
 
-  static Future<int> removeFavoriteEnglishHymn(String hymnNumber) async {
-    return await db.removeFavoriteEnglishHymn(hymnNumber);
+  static removeFavorites() async {
+    await db.removeAllFavoriteGounHymns();
+    await db.removeAllFavoriteFrenchHymns();
+    await db.removeAllFavoriteYorubaHymns();
   }
 
   static Future<List<dynamic>> getFavoritesHymns() async {

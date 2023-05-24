@@ -33,6 +33,16 @@ class _HymnItemState extends State<HymnItem> {
     } else {}
   }
 
+  removeFavorite(hymn) {
+    if (hymn is GounHymn) {
+      HymnsService.removeFavoriteGounHymn(hymn.number);
+    } else if (hymn is FrHymn) {
+      HymnsService.removeFavoriteFrenchHymn(hymn.number);
+    } else if (hymn is YrHymn) {
+      HymnsService.removeFavoriteYorubaHymn(hymn.number);
+    } else {}
+  }
+
   @override
   Widget build(BuildContext context) {
     var hymn;
@@ -85,21 +95,25 @@ class _HymnItemState extends State<HymnItem> {
                       : Container(
                           padding: EdgeInsets.all(16),
                           alignment: Alignment.bottomRight,
-                          child: IconButton(
-                            onPressed: () {
-                              setFavorite(hymn);
-                              widget.reloadHymns();
-                            },
-                            icon: hymn.favorite == '1'
-                                ? Icon(
+                          child: hymn.favorite == '1'
+                              ? IconButton(
+                                  onPressed: () {
+                                    removeFavorite(hymn);
+                                    widget.reloadHymns();
+                                  },
+                                  icon: Icon(
                                     Icons.bookmark,
                                     color: Colors.green,
-                                  )
-                                : Icon(
+                                  ))
+                              : IconButton(
+                                  onPressed: () {
+                                    setFavorite(hymn);
+                                    widget.reloadHymns();
+                                  },
+                                  icon: Icon(
                                     Icons.bookmark_add_outlined,
                                     color: Colors.green,
-                                  ),
-                          )),
+                                  ))),
                 ],
               ),
             ),

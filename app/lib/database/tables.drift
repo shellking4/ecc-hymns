@@ -55,3 +55,12 @@ removeFavoriteFrenchHymn: UPDATE frHymns SET favorite = 0 WHERE number = :hymnNu
 removeFavoriteYorubaHymn: UPDATE yrHymns SET favorite = 0 WHERE number = :hymnNumber;
 
 removeFavoriteEnglishHymn: UPDATE enHymns SET favorite = 0 WHERE number = :hymnNumber;
+
+
+removeAllFavoriteGounHymns: UPDATE gounHymns SET favorite = 0 WHERE favorite = 1;
+
+removeAllFavoriteFrenchHymns: UPDATE frHymns SET favorite = 0 WHERE favorite = 1;
+
+removeAllFavoriteYorubaHymns: UPDATE yrHymns SET favorite = 0 WHERE favorite = 1;
+
+removeAllFavoriteEnglishHymns: UPDATE enHymns SET favorite = 0 WHERE favorite = 1;

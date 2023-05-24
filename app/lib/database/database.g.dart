@@ -1724,6 +1724,42 @@ abstract class _$HymnsDb extends GeneratedDatabase {
     );
   }
 
+  Future<int> removeAllFavoriteGounHymns() {
+    return customUpdate(
+      'UPDATE gounHymns SET favorite = 0 WHERE favorite = 1',
+      variables: [],
+      updates: {gounHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeAllFavoriteFrenchHymns() {
+    return customUpdate(
+      'UPDATE frHymns SET favorite = 0 WHERE favorite = 1',
+      variables: [],
+      updates: {frHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeAllFavoriteYorubaHymns() {
+    return customUpdate(
+      'UPDATE yrHymns SET favorite = 0 WHERE favorite = 1',
+      variables: [],
+      updates: {yrHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeAllFavoriteEnglishHymns() {
+    return customUpdate(
+      'UPDATE enHymns SET favorite = 0 WHERE favorite = 1',
+      variables: [],
+      updates: {enHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();

@@ -69,12 +69,12 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
                                     Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 5),
+                                      padding: EdgeInsetsDirectional.fromSTEB(15, 0, 0, 5),
                                       child: Column(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
                                           Padding(
-                                            padding: EdgeInsetsDirectional.fromSTEB(8, 40, 30, 2),
+                                            padding: EdgeInsetsDirectional.fromSTEB(4, 40, 30, 2),
                                             child: Text(
                                               'MES FAVORIS',
                                               style: TextStyle(fontSize: 18, fontFamily: "Inter", color: Colors.black),
@@ -87,8 +87,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                                 ),
                                 Divider(
                                   thickness: 0.3,
-                                  indent: 40,
-                                  endIndent: 24,
+                                  indent: 15,
+                                  endIndent: 20,
                                   color: FlutterFlowTheme.of(context).secondaryText,
                                 ),
                               ],
