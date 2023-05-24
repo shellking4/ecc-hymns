@@ -14,7 +14,7 @@ LazyDatabase _openConnection() {
     final file = File(p.join(dbFolder.path, 'app.db'));
     if (!await file.exists()) {
       // Extract the pre-populated database file from assets
-      final blob = await rootBundle.load('assets/hymnsData.db');
+      final blob = await rootBundle.load('assets/data.db');
       final blobBuffer = blob.buffer;
       await file.writeAsBytes(blobBuffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
     }
@@ -30,5 +30,5 @@ class HymnsDb extends _$HymnsDb {
   HymnsDb() : super(_openConnection());
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 1;
 }

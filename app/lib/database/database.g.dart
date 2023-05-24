@@ -28,8 +28,15 @@ class GounHymns extends Table
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: '');
+  static const VerificationMeta _favoriteMeta =
+      const VerificationMeta('favorite');
+  late final GeneratedColumn<String> favorite = GeneratedColumn<String>(
+      'favorite', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: '');
   @override
-  List<GeneratedColumn> get $columns => [number, title, content];
+  List<GeneratedColumn> get $columns => [number, title, content, favorite];
   @override
   String get aliasedName => _alias ?? 'gounHymns';
   @override
@@ -57,6 +64,12 @@ class GounHymns extends Table
     } else if (isInserting) {
       context.missing(_contentMeta);
     }
+    if (data.containsKey('favorite')) {
+      context.handle(_favoriteMeta,
+          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
+    } else if (isInserting) {
+      context.missing(_favoriteMeta);
+    }
     return context;
   }
 
@@ -72,6 +85,8 @@ class GounHymns extends Table
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       content: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
+      favorite: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}favorite'])!,
     );
   }
 
@@ -83,21 +98,26 @@ class GounHymns extends Table
   @override
   bool get dontWriteConstraints => true;
   @override
-  String get moduleAndArgs => 'FTS5(number, title, content)';
+  String get moduleAndArgs => 'FTS5(number, title, content, favorite)';
 }
 
 class GounHymn extends DataClass implements Insertable<GounHymn> {
   final String number;
   final String title;
   final String content;
+  final String favorite;
   const GounHymn(
-      {required this.number, required this.title, required this.content});
+      {required this.number,
+      required this.title,
+      required this.content,
+      required this.favorite});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['number'] = Variable<String>(number);
     map['title'] = Variable<String>(title);
     map['content'] = Variable<String>(content);
+    map['favorite'] = Variable<String>(favorite);
     return map;
   }
 
@@ -106,6 +126,7 @@ class GounHymn extends DataClass implements Insertable<GounHymn> {
       number: Value(number),
       title: Value(title),
       content: Value(content),
+      favorite: Value(favorite),
     );
   }
 
@@ -116,6 +137,7 @@ class GounHymn extends DataClass implements Insertable<GounHymn> {
       number: serializer.fromJson<String>(json['number']),
       title: serializer.fromJson<String>(json['title']),
       content: serializer.fromJson<String>(json['content']),
+      favorite: serializer.fromJson<String>(json['favorite']),
     );
   }
   @override
@@ -125,65 +147,76 @@ class GounHymn extends DataClass implements Insertable<GounHymn> {
       'number': serializer.toJson<String>(number),
       'title': serializer.toJson<String>(title),
       'content': serializer.toJson<String>(content),
+      'favorite': serializer.toJson<String>(favorite),
     };
   }
 
-  GounHymn copyWith({String? number, String? title, String? content}) =>
+  GounHymn copyWith(
+          {String? number, String? title, String? content, String? favorite}) =>
       GounHymn(
         number: number ?? this.number,
         title: title ?? this.title,
         content: content ?? this.content,
+        favorite: favorite ?? this.favorite,
       );
   @override
   String toString() {
     return (StringBuffer('GounHymn(')
           ..write('number: $number, ')
           ..write('title: $title, ')
-          ..write('content: $content')
+          ..write('content: $content, ')
+          ..write('favorite: $favorite')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(number, title, content);
+  int get hashCode => Object.hash(number, title, content, favorite);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is GounHymn &&
           other.number == this.number &&
           other.title == this.title &&
-          other.content == this.content);
+          other.content == this.content &&
+          other.favorite == this.favorite);
 }
 
 class GounHymnsCompanion extends UpdateCompanion<GounHymn> {
   final Value<String> number;
   final Value<String> title;
   final Value<String> content;
+  final Value<String> favorite;
   final Value<int> rowid;
   const GounHymnsCompanion({
     this.number = const Value.absent(),
     this.title = const Value.absent(),
     this.content = const Value.absent(),
+    this.favorite = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   GounHymnsCompanion.insert({
     required String number,
     required String title,
     required String content,
+    required String favorite,
     this.rowid = const Value.absent(),
   })  : number = Value(number),
         title = Value(title),
-        content = Value(content);
+        content = Value(content),
+        favorite = Value(favorite);
   static Insertable<GounHymn> custom({
     Expression<String>? number,
     Expression<String>? title,
     Expression<String>? content,
+    Expression<String>? favorite,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (number != null) 'number': number,
       if (title != null) 'title': title,
       if (content != null) 'content': content,
+      if (favorite != null) 'favorite': favorite,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -192,11 +225,13 @@ class GounHymnsCompanion extends UpdateCompanion<GounHymn> {
       {Value<String>? number,
       Value<String>? title,
       Value<String>? content,
+      Value<String>? favorite,
       Value<int>? rowid}) {
     return GounHymnsCompanion(
       number: number ?? this.number,
       title: title ?? this.title,
       content: content ?? this.content,
+      favorite: favorite ?? this.favorite,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -213,6 +248,9 @@ class GounHymnsCompanion extends UpdateCompanion<GounHymn> {
     if (content.present) {
       map['content'] = Variable<String>(content.value);
     }
+    if (favorite.present) {
+      map['favorite'] = Variable<String>(favorite.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -225,6 +263,7 @@ class GounHymnsCompanion extends UpdateCompanion<GounHymn> {
           ..write('number: $number, ')
           ..write('title: $title, ')
           ..write('content: $content, ')
+          ..write('favorite: $favorite, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -256,8 +295,15 @@ class FrHymns extends Table
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: '');
+  static const VerificationMeta _favoriteMeta =
+      const VerificationMeta('favorite');
+  late final GeneratedColumn<String> favorite = GeneratedColumn<String>(
+      'favorite', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: '');
   @override
-  List<GeneratedColumn> get $columns => [number, title, content];
+  List<GeneratedColumn> get $columns => [number, title, content, favorite];
   @override
   String get aliasedName => _alias ?? 'frHymns';
   @override
@@ -285,6 +331,12 @@ class FrHymns extends Table
     } else if (isInserting) {
       context.missing(_contentMeta);
     }
+    if (data.containsKey('favorite')) {
+      context.handle(_favoriteMeta,
+          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
+    } else if (isInserting) {
+      context.missing(_favoriteMeta);
+    }
     return context;
   }
 
@@ -300,6 +352,8 @@ class FrHymns extends Table
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       content: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
+      favorite: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}favorite'])!,
     );
   }
 
@@ -311,21 +365,26 @@ class FrHymns extends Table
   @override
   bool get dontWriteConstraints => true;
   @override
-  String get moduleAndArgs => 'FTS5(number, title, content)';
+  String get moduleAndArgs => 'FTS5(number, title, content, favorite)';
 }
 
 class FrHymn extends DataClass implements Insertable<FrHymn> {
   final String number;
   final String title;
   final String content;
+  final String favorite;
   const FrHymn(
-      {required this.number, required this.title, required this.content});
+      {required this.number,
+      required this.title,
+      required this.content,
+      required this.favorite});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['number'] = Variable<String>(number);
     map['title'] = Variable<String>(title);
     map['content'] = Variable<String>(content);
+    map['favorite'] = Variable<String>(favorite);
     return map;
   }
 
@@ -334,6 +393,7 @@ class FrHymn extends DataClass implements Insertable<FrHymn> {
       number: Value(number),
       title: Value(title),
       content: Value(content),
+      favorite: Value(favorite),
     );
   }
 
@@ -344,6 +404,7 @@ class FrHymn extends DataClass implements Insertable<FrHymn> {
       number: serializer.fromJson<String>(json['number']),
       title: serializer.fromJson<String>(json['title']),
       content: serializer.fromJson<String>(json['content']),
+      favorite: serializer.fromJson<String>(json['favorite']),
     );
   }
   @override
@@ -353,64 +414,76 @@ class FrHymn extends DataClass implements Insertable<FrHymn> {
       'number': serializer.toJson<String>(number),
       'title': serializer.toJson<String>(title),
       'content': serializer.toJson<String>(content),
+      'favorite': serializer.toJson<String>(favorite),
     };
   }
 
-  FrHymn copyWith({String? number, String? title, String? content}) => FrHymn(
+  FrHymn copyWith(
+          {String? number, String? title, String? content, String? favorite}) =>
+      FrHymn(
         number: number ?? this.number,
         title: title ?? this.title,
         content: content ?? this.content,
+        favorite: favorite ?? this.favorite,
       );
   @override
   String toString() {
     return (StringBuffer('FrHymn(')
           ..write('number: $number, ')
           ..write('title: $title, ')
-          ..write('content: $content')
+          ..write('content: $content, ')
+          ..write('favorite: $favorite')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(number, title, content);
+  int get hashCode => Object.hash(number, title, content, favorite);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is FrHymn &&
           other.number == this.number &&
           other.title == this.title &&
-          other.content == this.content);
+          other.content == this.content &&
+          other.favorite == this.favorite);
 }
 
 class FrHymnsCompanion extends UpdateCompanion<FrHymn> {
   final Value<String> number;
   final Value<String> title;
   final Value<String> content;
+  final Value<String> favorite;
   final Value<int> rowid;
   const FrHymnsCompanion({
     this.number = const Value.absent(),
     this.title = const Value.absent(),
     this.content = const Value.absent(),
+    this.favorite = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   FrHymnsCompanion.insert({
     required String number,
     required String title,
     required String content,
+    required String favorite,
     this.rowid = const Value.absent(),
   })  : number = Value(number),
         title = Value(title),
-        content = Value(content);
+        content = Value(content),
+        favorite = Value(favorite);
   static Insertable<FrHymn> custom({
     Expression<String>? number,
     Expression<String>? title,
     Expression<String>? content,
+    Expression<String>? favorite,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (number != null) 'number': number,
       if (title != null) 'title': title,
       if (content != null) 'content': content,
+      if (favorite != null) 'favorite': favorite,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -419,11 +492,13 @@ class FrHymnsCompanion extends UpdateCompanion<FrHymn> {
       {Value<String>? number,
       Value<String>? title,
       Value<String>? content,
+      Value<String>? favorite,
       Value<int>? rowid}) {
     return FrHymnsCompanion(
       number: number ?? this.number,
       title: title ?? this.title,
       content: content ?? this.content,
+      favorite: favorite ?? this.favorite,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -440,6 +515,9 @@ class FrHymnsCompanion extends UpdateCompanion<FrHymn> {
     if (content.present) {
       map['content'] = Variable<String>(content.value);
     }
+    if (favorite.present) {
+      map['favorite'] = Variable<String>(favorite.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -452,6 +530,7 @@ class FrHymnsCompanion extends UpdateCompanion<FrHymn> {
           ..write('number: $number, ')
           ..write('title: $title, ')
           ..write('content: $content, ')
+          ..write('favorite: $favorite, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -483,8 +562,15 @@ class YrHymns extends Table
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: '');
+  static const VerificationMeta _favoriteMeta =
+      const VerificationMeta('favorite');
+  late final GeneratedColumn<String> favorite = GeneratedColumn<String>(
+      'favorite', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: '');
   @override
-  List<GeneratedColumn> get $columns => [number, title, content];
+  List<GeneratedColumn> get $columns => [number, title, content, favorite];
   @override
   String get aliasedName => _alias ?? 'yrHymns';
   @override
@@ -512,6 +598,12 @@ class YrHymns extends Table
     } else if (isInserting) {
       context.missing(_contentMeta);
     }
+    if (data.containsKey('favorite')) {
+      context.handle(_favoriteMeta,
+          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
+    } else if (isInserting) {
+      context.missing(_favoriteMeta);
+    }
     return context;
   }
 
@@ -527,6 +619,8 @@ class YrHymns extends Table
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       content: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
+      favorite: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}favorite'])!,
     );
   }
 
@@ -538,21 +632,26 @@ class YrHymns extends Table
   @override
   bool get dontWriteConstraints => true;
   @override
-  String get moduleAndArgs => 'FTS5(number, title, content)';
+  String get moduleAndArgs => 'FTS5(number, title, content, favorite)';
 }
 
 class YrHymn extends DataClass implements Insertable<YrHymn> {
   final String number;
   final String title;
   final String content;
+  final String favorite;
   const YrHymn(
-      {required this.number, required this.title, required this.content});
+      {required this.number,
+      required this.title,
+      required this.content,
+      required this.favorite});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['number'] = Variable<String>(number);
     map['title'] = Variable<String>(title);
     map['content'] = Variable<String>(content);
+    map['favorite'] = Variable<String>(favorite);
     return map;
   }
 
@@ -561,6 +660,7 @@ class YrHymn extends DataClass implements Insertable<YrHymn> {
       number: Value(number),
       title: Value(title),
       content: Value(content),
+      favorite: Value(favorite),
     );
   }
 
@@ -571,6 +671,7 @@ class YrHymn extends DataClass implements Insertable<YrHymn> {
       number: serializer.fromJson<String>(json['number']),
       title: serializer.fromJson<String>(json['title']),
       content: serializer.fromJson<String>(json['content']),
+      favorite: serializer.fromJson<String>(json['favorite']),
     );
   }
   @override
@@ -580,64 +681,76 @@ class YrHymn extends DataClass implements Insertable<YrHymn> {
       'number': serializer.toJson<String>(number),
       'title': serializer.toJson<String>(title),
       'content': serializer.toJson<String>(content),
+      'favorite': serializer.toJson<String>(favorite),
     };
   }
 
-  YrHymn copyWith({String? number, String? title, String? content}) => YrHymn(
+  YrHymn copyWith(
+          {String? number, String? title, String? content, String? favorite}) =>
+      YrHymn(
         number: number ?? this.number,
         title: title ?? this.title,
         content: content ?? this.content,
+        favorite: favorite ?? this.favorite,
       );
   @override
   String toString() {
     return (StringBuffer('YrHymn(')
           ..write('number: $number, ')
           ..write('title: $title, ')
-          ..write('content: $content')
+          ..write('content: $content, ')
+          ..write('favorite: $favorite')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(number, title, content);
+  int get hashCode => Object.hash(number, title, content, favorite);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is YrHymn &&
           other.number == this.number &&
           other.title == this.title &&
-          other.content == this.content);
+          other.content == this.content &&
+          other.favorite == this.favorite);
 }
 
 class YrHymnsCompanion extends UpdateCompanion<YrHymn> {
   final Value<String> number;
   final Value<String> title;
   final Value<String> content;
+  final Value<String> favorite;
   final Value<int> rowid;
   const YrHymnsCompanion({
     this.number = const Value.absent(),
     this.title = const Value.absent(),
     this.content = const Value.absent(),
+    this.favorite = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   YrHymnsCompanion.insert({
     required String number,
     required String title,
     required String content,
+    required String favorite,
     this.rowid = const Value.absent(),
   })  : number = Value(number),
         title = Value(title),
-        content = Value(content);
+        content = Value(content),
+        favorite = Value(favorite);
   static Insertable<YrHymn> custom({
     Expression<String>? number,
     Expression<String>? title,
     Expression<String>? content,
+    Expression<String>? favorite,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (number != null) 'number': number,
       if (title != null) 'title': title,
       if (content != null) 'content': content,
+      if (favorite != null) 'favorite': favorite,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -646,11 +759,13 @@ class YrHymnsCompanion extends UpdateCompanion<YrHymn> {
       {Value<String>? number,
       Value<String>? title,
       Value<String>? content,
+      Value<String>? favorite,
       Value<int>? rowid}) {
     return YrHymnsCompanion(
       number: number ?? this.number,
       title: title ?? this.title,
       content: content ?? this.content,
+      favorite: favorite ?? this.favorite,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -667,6 +782,9 @@ class YrHymnsCompanion extends UpdateCompanion<YrHymn> {
     if (content.present) {
       map['content'] = Variable<String>(content.value);
     }
+    if (favorite.present) {
+      map['favorite'] = Variable<String>(favorite.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -679,6 +797,7 @@ class YrHymnsCompanion extends UpdateCompanion<YrHymn> {
           ..write('number: $number, ')
           ..write('title: $title, ')
           ..write('content: $content, ')
+          ..write('favorite: $favorite, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -710,8 +829,15 @@ class EnHymns extends Table
       type: DriftSqlType.string,
       requiredDuringInsert: true,
       $customConstraints: '');
+  static const VerificationMeta _favoriteMeta =
+      const VerificationMeta('favorite');
+  late final GeneratedColumn<String> favorite = GeneratedColumn<String>(
+      'favorite', aliasedName, false,
+      type: DriftSqlType.string,
+      requiredDuringInsert: true,
+      $customConstraints: '');
   @override
-  List<GeneratedColumn> get $columns => [number, title, content];
+  List<GeneratedColumn> get $columns => [number, title, content, favorite];
   @override
   String get aliasedName => _alias ?? 'enHymns';
   @override
@@ -739,6 +865,12 @@ class EnHymns extends Table
     } else if (isInserting) {
       context.missing(_contentMeta);
     }
+    if (data.containsKey('favorite')) {
+      context.handle(_favoriteMeta,
+          favorite.isAcceptableOrUnknown(data['favorite']!, _favoriteMeta));
+    } else if (isInserting) {
+      context.missing(_favoriteMeta);
+    }
     return context;
   }
 
@@ -754,6 +886,8 @@ class EnHymns extends Table
           .read(DriftSqlType.string, data['${effectivePrefix}title'])!,
       content: attachedDatabase.typeMapping
           .read(DriftSqlType.string, data['${effectivePrefix}content'])!,
+      favorite: attachedDatabase.typeMapping
+          .read(DriftSqlType.string, data['${effectivePrefix}favorite'])!,
     );
   }
 
@@ -765,21 +899,26 @@ class EnHymns extends Table
   @override
   bool get dontWriteConstraints => true;
   @override
-  String get moduleAndArgs => 'FTS5(number, title, content)';
+  String get moduleAndArgs => 'FTS5(number, title, content, favorite)';
 }
 
 class EnHymn extends DataClass implements Insertable<EnHymn> {
   final String number;
   final String title;
   final String content;
+  final String favorite;
   const EnHymn(
-      {required this.number, required this.title, required this.content});
+      {required this.number,
+      required this.title,
+      required this.content,
+      required this.favorite});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     map['number'] = Variable<String>(number);
     map['title'] = Variable<String>(title);
     map['content'] = Variable<String>(content);
+    map['favorite'] = Variable<String>(favorite);
     return map;
   }
 
@@ -788,6 +927,7 @@ class EnHymn extends DataClass implements Insertable<EnHymn> {
       number: Value(number),
       title: Value(title),
       content: Value(content),
+      favorite: Value(favorite),
     );
   }
 
@@ -798,6 +938,7 @@ class EnHymn extends DataClass implements Insertable<EnHymn> {
       number: serializer.fromJson<String>(json['number']),
       title: serializer.fromJson<String>(json['title']),
       content: serializer.fromJson<String>(json['content']),
+      favorite: serializer.fromJson<String>(json['favorite']),
     );
   }
   @override
@@ -807,64 +948,76 @@ class EnHymn extends DataClass implements Insertable<EnHymn> {
       'number': serializer.toJson<String>(number),
       'title': serializer.toJson<String>(title),
       'content': serializer.toJson<String>(content),
+      'favorite': serializer.toJson<String>(favorite),
     };
   }
 
-  EnHymn copyWith({String? number, String? title, String? content}) => EnHymn(
+  EnHymn copyWith(
+          {String? number, String? title, String? content, String? favorite}) =>
+      EnHymn(
         number: number ?? this.number,
         title: title ?? this.title,
         content: content ?? this.content,
+        favorite: favorite ?? this.favorite,
       );
   @override
   String toString() {
     return (StringBuffer('EnHymn(')
           ..write('number: $number, ')
           ..write('title: $title, ')
-          ..write('content: $content')
+          ..write('content: $content, ')
+          ..write('favorite: $favorite')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(number, title, content);
+  int get hashCode => Object.hash(number, title, content, favorite);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       (other is EnHymn &&
           other.number == this.number &&
           other.title == this.title &&
-          other.content == this.content);
+          other.content == this.content &&
+          other.favorite == this.favorite);
 }
 
 class EnHymnsCompanion extends UpdateCompanion<EnHymn> {
   final Value<String> number;
   final Value<String> title;
   final Value<String> content;
+  final Value<String> favorite;
   final Value<int> rowid;
   const EnHymnsCompanion({
     this.number = const Value.absent(),
     this.title = const Value.absent(),
     this.content = const Value.absent(),
+    this.favorite = const Value.absent(),
     this.rowid = const Value.absent(),
   });
   EnHymnsCompanion.insert({
     required String number,
     required String title,
     required String content,
+    required String favorite,
     this.rowid = const Value.absent(),
   })  : number = Value(number),
         title = Value(title),
-        content = Value(content);
+        content = Value(content),
+        favorite = Value(favorite);
   static Insertable<EnHymn> custom({
     Expression<String>? number,
     Expression<String>? title,
     Expression<String>? content,
+    Expression<String>? favorite,
     Expression<int>? rowid,
   }) {
     return RawValuesInsertable({
       if (number != null) 'number': number,
       if (title != null) 'title': title,
       if (content != null) 'content': content,
+      if (favorite != null) 'favorite': favorite,
       if (rowid != null) 'rowid': rowid,
     });
   }
@@ -873,11 +1026,13 @@ class EnHymnsCompanion extends UpdateCompanion<EnHymn> {
       {Value<String>? number,
       Value<String>? title,
       Value<String>? content,
+      Value<String>? favorite,
       Value<int>? rowid}) {
     return EnHymnsCompanion(
       number: number ?? this.number,
       title: title ?? this.title,
       content: content ?? this.content,
+      favorite: favorite ?? this.favorite,
       rowid: rowid ?? this.rowid,
     );
   }
@@ -894,6 +1049,9 @@ class EnHymnsCompanion extends UpdateCompanion<EnHymn> {
     if (content.present) {
       map['content'] = Variable<String>(content.value);
     }
+    if (favorite.present) {
+      map['favorite'] = Variable<String>(favorite.value);
+    }
     if (rowid.present) {
       map['rowid'] = Variable<int>(rowid.value);
     }
@@ -906,6 +1064,7 @@ class EnHymnsCompanion extends UpdateCompanion<EnHymn> {
           ..write('number: $number, ')
           ..write('title: $title, ')
           ..write('content: $content, ')
+          ..write('favorite: $favorite, ')
           ..write('rowid: $rowid')
           ..write(')'))
         .toString();
@@ -1459,6 +1618,110 @@ abstract class _$HymnsDb extends GeneratedDatabase {
           enHymns,
           ...generatedpredicate.watchedTables,
         }).asyncMap(enHymns.mapFromRow);
+  }
+
+  Selectable<GounHymn> gounFavoritesHymns() {
+    return customSelect('SELECT * FROM gounHymns WHERE favorite = 1',
+        variables: [],
+        readsFrom: {
+          gounHymns,
+        }).asyncMap(gounHymns.mapFromRow);
+  }
+
+  Selectable<FrHymn> frenchFavoritesHymns() {
+    return customSelect('SELECT * FROM frHymns WHERE favorite = 1',
+        variables: [],
+        readsFrom: {
+          frHymns,
+        }).asyncMap(frHymns.mapFromRow);
+  }
+
+  Selectable<YrHymn> yorubaFavoritesHymns() {
+    return customSelect('SELECT * FROM yrHymns WHERE favorite = 1',
+        variables: [],
+        readsFrom: {
+          yrHymns,
+        }).asyncMap(yrHymns.mapFromRow);
+  }
+
+  Selectable<EnHymn> englishFavoritesHymns() {
+    return customSelect('SELECT * FROM enHymns WHERE favorite = 1',
+        variables: [],
+        readsFrom: {
+          enHymns,
+        }).asyncMap(enHymns.mapFromRow);
+  }
+
+  Future<int> setFavoriteGounHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE gounHymns SET favorite = 1 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {gounHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> setFavoriteFrenchHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE frHymns SET favorite = 1 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {frHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> setFavoriteYorubaHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE yrHymns SET favorite = 1 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {yrHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> setFavoriteEnglishHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE enHymns SET favorite = 1 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {enHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeFavoriteGounHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE gounHymns SET favorite = 0 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {gounHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeFavoriteFrenchHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE frHymns SET favorite = 0 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {frHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeFavoriteYorubaHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE yrHymns SET favorite = 0 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {yrHymns},
+      updateKind: UpdateKind.update,
+    );
+  }
+
+  Future<int> removeFavoriteEnglishHymn(String hymnNumber) {
+    return customUpdate(
+      'UPDATE enHymns SET favorite = 0 WHERE number = ?1',
+      variables: [Variable<String>(hymnNumber)],
+      updates: {enHymns},
+      updateKind: UpdateKind.update,
+    );
   }
 
   @override

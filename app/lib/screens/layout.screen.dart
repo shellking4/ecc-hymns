@@ -70,7 +70,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
           backgroundColor: Colors.white,
           handleAndroidBackButtonPress: true,
           resizeToAvoidBottomInset: true,
-          stateManagement: true,
+          stateManagement: false,
           navBarHeight: 100,
           hideNavigationBarWhenKeyboardShows: true,
           decoration: NavBarDecoration(
@@ -80,7 +80,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
           popAllScreensOnTapOfSelectedTab: true,
           popActionScreens: PopActionScreensType.all,
           itemAnimationProperties: ItemAnimationProperties(
-            // Navigation Bar's items animation properties.
             duration: Duration(milliseconds: 300),
             curve: Curves.ease,
           ),

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'constants.util.dart';
 
 class FavoriteMenuDialog extends StatefulWidget {
-  const FavoriteMenuDialog({super.key});
+  final Function removeFavorite;
+  final Function removeAllFavorites;
+
+  const FavoriteMenuDialog({super.key, required this.removeFavorite, required this.removeAllFavorites});
 
   @override
   State<FavoriteMenuDialog> createState() => _FavoriteMenuDialogState();
@@ -62,14 +65,14 @@ class _FavoriteMenuDialogState extends State<FavoriteMenuDialog> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                 child: TextButton(
-                  onPressed: () {},
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Mettre en dessous',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 12, fontFamily: "Inter", color: eccBlue),
-                    ),
+                  onPressed: () {
+                    widget.removeFavorite();
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'Retirer des favoris',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12, fontFamily: "Inter", color: eccBlue),
                   ),
                 ),
               ),
@@ -94,9 +97,12 @@ class _FavoriteMenuDialogState extends State<FavoriteMenuDialog> {
               child: Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    widget.removeAllFavorites();
+                    Navigator.of(context).pop();
+                  },
                   child: Text(
-                    'Retirer des favoris',
+                    'Retirer tous les favoris',
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 12, fontFamily: "Inter", color: eccBlue),
                   ),

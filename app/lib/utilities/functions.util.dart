@@ -3,6 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:unorm_dart/unorm_dart.dart' as unorm;
 
+import '../database/database.dart';
+import '../screens/french_hymn.screen.dart';
+import '../screens/goun_hymn.screen.dart';
+import '../screens/yoruba_hymn.screen.dart';
+
 bool isNumeric(String? s) {
   if (s == null) {
     return false;
@@ -87,3 +92,18 @@ routeToScreen(BuildContext context, Widget screen) {
     pageTransitionAnimation: PageTransitionAnimation.cupertino,
   );
 }
+
+getHymnAndNavigate(hymnItem, BuildContext context) {
+    if (hymnItem is GounHymn) {
+      Widget screen = GounHymnScreen(gounHymnItem: hymnItem);
+      routeToScreen(context, screen);
+    }
+    if (hymnItem is FrHymn) {
+      Widget screen = FrenchHymnScreen(frenchHymnItem: hymnItem);
+      routeToScreen(context, screen);
+    }
+    if (hymnItem is YrHymn) {
+      Widget screen = YorubaHymnScreen(yorubaHymnItem: hymnItem);
+      routeToScreen(context, screen);
+    }
+  }

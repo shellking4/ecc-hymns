@@ -1,8 +1,6 @@
 import 'package:ecchymns/database/database.dart';
-import 'package:ecchymns/models/french_hymn.model.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
-import '../utilities/app_bar.util.dart';
 import '../utilities/base_scaffold.util.dart';
 import '../utilities/hymn_item.util.dart';
 
@@ -25,6 +23,12 @@ class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
     super.initState();
   }
 
+  reloadHymns() {
+    setState(() {
+      _frenchHymns = HymnsService.getAllFrenchHymns();
+    });
+  }
+
   String setAppBarTitle() {
     return "CANTIQUES FRANÇAIS";
   }
@@ -33,41 +37,33 @@ class _FrenchHymnsScreenState extends State<FrenchHymnsScreen> {
   Widget build(BuildContext context) {
     return BaseScaffold(
         scaffoldBody: Stack(
-          children: <Widget>[
-            frenchHymnsData(),
-          ],
-        ));
-  }
-
-  FutureBuilder frenchHymnsData() {
-    return FutureBuilder<List<FrHymn>>(
-        future: _frenchHymns,
-        builder: (BuildContext context, AsyncSnapshot<List<FrHymn>> snapshot) {
-          if (snapshot.hasData) {
-            listOfFrenchHymns = snapshot.data!;
-            return frenchHymn(listOfFrenchHymns);
-          } else if (snapshot.hasError) {
-            return Text(
-              "${snapshot.error}",
-              style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0),
-            );
-          }
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-  }
-
-  Widget frenchHymn(data) {
-    var hymnItem = HymnItem();
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
-      child: ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return hymnItem.buildHymnItemView(context, data, index);
-        },
-      ),
-    );
+      children: <Widget>[
+        FutureBuilder<List<FrHymn>>(
+            future: _frenchHymns,
+            builder: (BuildContext context, AsyncSnapshot<List<FrHymn>> snapshot) {
+              if (snapshot.hasData) {
+                listOfFrenchHymns = snapshot.data!;
+                return Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
+                  child: ListView.builder(
+                    itemCount: listOfFrenchHymns!.length,
+                    itemBuilder: (context, index) {
+                      return HymnItem(
+                        hymns: listOfFrenchHymns,
+                        hymnIndex: index,
+                        reloadHymns: reloadHymns,
+                      );
+                    },
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return SizedBox();
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            })
+      ],
+    ));
   }
 }

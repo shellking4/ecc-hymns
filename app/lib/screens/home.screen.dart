@@ -54,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             padding: EdgeInsetsDirectional.fromSTEB(18, 30, 0, 15),
                             child: Text(
                               'LES CANTIQUES DE L\'ECC',
-                              style: TextStyle(fontSize: 15, fontFamily: "Inter", color: Colors.black),
+                              style: TextStyle(fontSize: 15, fontFamily: "Kiwi", color: Colors.black),
                             ),
                           ),
                           HomeMenuItem(

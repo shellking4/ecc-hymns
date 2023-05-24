@@ -1,25 +1,45 @@
 import 'package:ecchymns/database/database.dart';
-import 'package:ecchymns/screens/french_hymn.screen.dart';
-import 'package:ecchymns/screens/yoruba_hymn.screen.dart';
-import 'package:ecchymns/screens/goun_hymn.screen.dart';
+import 'package:ecchymns/services/hymns.service.dart';
 import 'package:ecchymns/utilities/functions.util.dart';
 import 'constants.util.dart';
 import 'package:flutter/material.dart';
 
-class HymnItem extends StatelessWidget {
+class HymnItem extends StatefulWidget {
   final hymnItem;
-  const HymnItem({Key? key, this.hymnItem}) : super(key: key);
+  final hymns;
+  final hymnIndex;
+  final Function reloadHymns;
+  final bool searching;
+  const HymnItem(
+      {Key? key, this.hymns, this.hymnIndex, this.hymnItem, required this.reloadHymns, this.searching = false})
+      : super(key: key);
 
+  @override
+  State<HymnItem> createState() => _HymnItemState();
+}
+
+class _HymnItemState extends State<HymnItem> {
   String setTitle(hymn) {
     return "CANTIQUE N°${hymn.number}";
   }
 
-  Widget buildHymnItemView(BuildContext context, data, index) {
+  setFavorite(hymn) {
+    if (hymn is GounHymn) {
+      HymnsService.setFavoriteGounHymn(hymn.number);
+    } else if (hymn is FrHymn) {
+      HymnsService.setFavoriteFrenchHymn(hymn.number);
+    } else if (hymn is YrHymn) {
+      HymnsService.setFavoriteYorubaHymn(hymn.number);
+    } else {}
+  }
+
+  @override
+  Widget build(BuildContext context) {
     var hymn;
-    if ((hymnItem != null) && (hymnItem is GounHymn || hymnItem is FrHymn || hymnItem is YrHymn)) {
-      hymn = hymnItem;
+    if (widget.hymnItem != null) {
+      hymn = widget.hymnItem;
     } else {
-      hymn = data[index];
+      hymn = widget.hymns[widget.hymnIndex];
     }
     return GestureDetector(
       onTap: () {
@@ -60,23 +80,26 @@ class HymnItem extends StatelessWidget {
                       style: TextStyle(fontSize: 14, fontFamily: "Kiwi", color: Colors.black),
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      print("tapped");
-                    },
-                    child: Container(
-                        padding: EdgeInsets.all(16),
-                        alignment: Alignment.bottomRight,
-                        child: IconButton(
-                          onPressed: () {
-                            print("tapped");
-                          },
-                          icon: Icon(
-                            Icons.bookmark_add_outlined,
-                            color: Colors.green,
-                          ),
-                        )),
-                  ),
+                  widget.searching == true
+                      ? SizedBox()
+                      : Container(
+                          padding: EdgeInsets.all(16),
+                          alignment: Alignment.bottomRight,
+                          child: IconButton(
+                            onPressed: () {
+                              setFavorite(hymn);
+                              widget.reloadHymns();
+                            },
+                            icon: hymn.favorite == '1'
+                                ? Icon(
+                                    Icons.bookmark,
+                                    color: Colors.green,
+                                  )
+                                : Icon(
+                                    Icons.bookmark_add_outlined,
+                                    color: Colors.green,
+                                  ),
+                          )),
                 ],
               ),
             ),
@@ -84,25 +107,5 @@ class HymnItem extends StatelessWidget {
         ),
       ]),
     );
-  }
-
-  getHymnAndNavigate(hymnItem, BuildContext context) {
-    if (hymnItem is GounHymn) {
-      Widget screen = GounHymnScreen(gounHymnItem: hymnItem);
-      routeToScreen(context, screen);
-    }
-    if (hymnItem is FrHymn) {
-      Widget screen = FrenchHymnScreen(frenchHymnItem: hymnItem);
-      routeToScreen(context, screen);
-    }
-    if (hymnItem is YrHymn) {
-      Widget screen = YorubaHymnScreen(yorubaHymnItem: hymnItem);
-      routeToScreen(context, screen);
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    throw UnimplementedError();
   }
 }

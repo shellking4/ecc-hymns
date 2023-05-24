@@ -18,7 +18,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 6);
+    var duration = Duration(seconds: 3);
     return Timer(duration, route);
   }
 
@@ -29,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         type: PageTransitionType.rightToLeft,
         alignment: Alignment.bottomCenter,
         child: AuthorScreen(),
-        duration: Duration(milliseconds: 500)
+        duration: Duration(milliseconds: 250)
       ),
       (route) => false,
     );

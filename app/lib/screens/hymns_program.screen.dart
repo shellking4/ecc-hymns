@@ -37,8 +37,6 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
         scaffoldBody: FutureBuilder<List<HymnProgram>>(
             future: _hymnsPrograms,
             builder: (BuildContext context, AsyncSnapshot<List<HymnProgram>> snapshot) {
-              print(snapshot.hasData);
-              print(snapshot.hasError);
               if (snapshot.hasData) {
                 listOfHymnPrograms = snapshot.data!;
                 return SingleChildScrollView(
@@ -258,11 +256,7 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                       )),
                 );
               } else if (snapshot.hasError) {
-                print(snapshot.error);
-                return Center(
-                  child: Text("Veuillez patienter pendant que nous mettons les choses en place",
-                      style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0)),
-                );
+                return SizedBox();
               }
               return Center(
                 child: CircularProgressIndicator(),

@@ -1,14 +1,14 @@
 CREATE VIRTUAL TABLE gounHymns 
-USING FTS5(number, title, content);
+USING FTS5(number, title, content, favorite);
 
 CREATE VIRTUAL TABLE frHymns 
-USING FTS5(number, title, content);
+USING FTS5(number, title, content, favorite);
 
 CREATE VIRTUAL TABLE yrHymns 
-USING FTS5(number, title, content);
+USING FTS5(number, title, content, favorite);
 
 CREATE VIRTUAL TABLE enHymns 
-USING FTS5(number, title, content);
+USING FTS5(number, title, content, favorite);
 
 CREATE VIRTUAL TABLE hymnPrograms 
 USING FTS5(date, firstHymn, secondHymn, thirdHymn, fourthHymn, fifthHymn, sixthHymn, seventhHymn);
@@ -30,3 +30,28 @@ frenchHymnSearchResults ($predicate = TRUE): SELECT * FROM frHymns WHERE $predic
 yorubaHymnSearchResults ($predicate = TRUE): SELECT * FROM yrHymns WHERE $predicate AND rank MATCH 'bm25(10.1, 16.9, 10.0)' ORDER BY rank;
 
 englishHymnSearchResults ($predicate = TRUE): SELECT * FROM enHymns WHERE $predicate AND rank MATCH 'bm25(10.1, 16.9, 10.0)' ORDER BY rank;
+
+gounFavoritesHymns: SELECT * FROM gounHymns WHERE favorite = 1;
+
+frenchFavoritesHymns: SELECT * FROM frHymns WHERE favorite = 1;
+
+yorubaFavoritesHymns: SELECT * FROM yrHymns WHERE favorite = 1;
+
+englishFavoritesHymns: SELECT * FROM enHymns WHERE favorite = 1;
+
+setFavoriteGounHymn: UPDATE gounHymns SET favorite = 1 WHERE number = :hymnNumber;
+
+setFavoriteFrenchHymn: UPDATE frHymns SET favorite = 1 WHERE number = :hymnNumber;
+
+setFavoriteYorubaHymn: UPDATE yrHymns SET favorite = 1 WHERE number = :hymnNumber;
+
+setFavoriteEnglishHymn: UPDATE enHymns SET favorite = 1 WHERE number = :hymnNumber;
+
+
+removeFavoriteGounHymn: UPDATE gounHymns SET favorite = 0 WHERE number = :hymnNumber;
+
+removeFavoriteFrenchHymn: UPDATE frHymns SET favorite = 0 WHERE number = :hymnNumber;
+
+removeFavoriteYorubaHymn: UPDATE yrHymns SET favorite = 0 WHERE number = :hymnNumber;
+
+removeFavoriteEnglishHymn: UPDATE enHymns SET favorite = 0 WHERE number = :hymnNumber;

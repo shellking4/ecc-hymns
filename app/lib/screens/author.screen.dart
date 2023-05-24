@@ -20,7 +20,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
   }
 
   startTime() async {
-    var duration = Duration(seconds: 6);
+    var duration = Duration(seconds: 3);
     return Timer(duration, route);
   }
 
@@ -30,7 +30,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
       PageTransition(
         type: PageTransitionType.topToBottom,
         child: LayoutScreen(),
-        duration: Duration(milliseconds: 500)
+        duration: Duration(milliseconds: 250)
       ),
       (route) => false,
     );
@@ -56,7 +56,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 9),
                     child: Text(
                       "ECC CANTIQUES",
-                      style: TextStyle(fontSize: 17, fontFamily: "InterRegular", color: eccWhiteTheme),
+                      style: TextStyle(fontSize: 17, fontFamily: "Inter", color: eccWhiteTheme),
                     ),
                   ),
                 ),
@@ -69,7 +69,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
                   child: Center(
                     child: Text(
                       "BROUGHT TO YOU BY",
-                      style: TextStyle(fontSize: 15, fontFamily: "InterRegular", color: eccWhiteTheme),
+                      style: TextStyle(fontSize: 15, fontFamily: "Inter", color: eccWhiteTheme),
                     ),
                   ),
                 ),
@@ -83,7 +83,7 @@ class _AuthorScreenState extends State<AuthorScreen> {
                       onPressed: launchDonaldTwitterUrl,
                       child: Text(
                         "Donald",
-                        style: TextStyle(fontSize: 15, fontFamily: "InterRegular", color: Color.fromARGB(255, 194, 188, 188)),
+                        style: TextStyle(fontSize: 15, fontFamily: "Kiwi", color: Color.fromARGB(255, 194, 188, 188)),
                       ),
                     ),
                     SizedBox(
