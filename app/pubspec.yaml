@@ -13,10 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
   json_annotation: ^4.8.0
-  flutter_sequence_animation: "^3.0.0"
+  flutter_sequence_animation: "^4.0.0"
   animated_text_kit: ^4.2.2
   font_awesome_flutter: ^10.4.0
-  route_transitions: ^1.0.2
   flappy_search_bar_ns: ^2.0.2
   easy_rich_text: ^0.5.4
   need_resume: ^1.0.5+1
@@ -25,7 +24,6 @@ dependencies:
   dio_cache_interceptor: ^3.2.7
   flutter_html: ^2.2.1
   dio: ^5.1.1
-  flutter_string_encryption: ^0.3.1
   unorm_dart: ^0.2.0
 
 dev_dependencies:
