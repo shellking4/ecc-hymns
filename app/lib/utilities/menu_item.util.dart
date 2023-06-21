@@ -5,7 +5,7 @@ class Menu_Item extends StatelessWidget {
   final String title;
   final IconData? icon1;
   final IconData? icon2;
-  final dynamic? screen;
+  final dynamic screen;
   final Color? color;
 
   const Menu_Item(

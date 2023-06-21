@@ -4,7 +4,7 @@ class RoundedButton extends StatelessWidget {
   final Color? color;
   final String? title;
   final double width;
-  final Function onPressed;
+  final VoidCallback onPressed;
 
   const RoundedButton(
       {Key? key,

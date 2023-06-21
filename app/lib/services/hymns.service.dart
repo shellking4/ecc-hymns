@@ -16,6 +16,7 @@ class HymnsService {
   static Future<List<GounHymn>> getAllGounHymns() async {
     List<GounHymn>? hymns;
     var queryUri = buildQueryUri(APIEndpoints.gounHymnsUrl);
+    print(queryUri);
     try {
       final response = await HTTP.client.get<String>(queryUri);
       String data = "${response.data}";

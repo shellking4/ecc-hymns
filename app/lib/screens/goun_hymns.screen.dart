@@ -61,8 +61,9 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
             return gounHymn(listOfGounnHymns);
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Veuillez patienter pendant que nous mettons les choses en place",
-                  style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0)),
+              child: Text(
+                "Veuillez patienter pendant que nous mettons les choses en place",
+                style: TextStyle(fontFamily: "Kiwi", fontSize: 13.0)),
             );
           }
           return Center(

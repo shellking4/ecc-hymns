@@ -22,7 +22,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   pretty_http_logger: ^0.2.1
   dio_cache_interceptor: ^3.2.7
-  flutter_html: ^2.2.1
+  flutter_html: ^3.0.0-alpha.6
   dio: ^5.1.1
   unorm_dart: ^0.2.0
 
