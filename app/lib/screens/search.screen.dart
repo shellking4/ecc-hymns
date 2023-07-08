@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flappy_search_bar_ns/flappy_search_bar_ns.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide SearchBar;
 import '../services/hymns.service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../utilities/hymn_item.util.dart';
