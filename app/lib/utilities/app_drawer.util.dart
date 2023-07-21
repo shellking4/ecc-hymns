@@ -31,9 +31,29 @@ class _AppDrawerState extends State<AppDrawer> {
           SizedBox(
             height: 40,
           ),
-          getMenu("A Propos", screen: AboutScreen(), icon: FontAwesomeIcons.circleInfo),
-          getMenu("Partager", screen: HomeScreen(), icon: FontAwesomeIcons.shareFromSquare),
-          getMenu("Quitter", screen: HomeScreen(), icon: FontAwesomeIcons.doorOpen),
+          getMenu(
+            "A Propos", 
+            screen: AboutScreen(), 
+            onTap: () { 
+              routeToScreenFromDrawer(context, AboutScreen());
+            }, 
+            icon: FontAwesomeIcons.circleInfo),
+          getMenu(
+            "Partager",
+            screen: HomeScreen(), 
+            onTap: () {
+
+            },
+            icon: FontAwesomeIcons.shareFromSquare
+          ),
+          getMenu(
+            "Quitter", 
+            screen: HomeScreen(), 
+            onTap: () { 
+
+            }, 
+            icon: FontAwesomeIcons.doorOpen
+          ),
           Expanded(
             child: Container(
               padding: EdgeInsets.all(16),
@@ -50,7 +70,7 @@ class _AppDrawerState extends State<AppDrawer> {
     );
   }
 
-  Widget getMenu(String title, {Widget? screen, bool? isActive, IconData? icon}) {
+  Widget getMenu(String title, {Widget? screen, bool? isActive, IconData? icon, onTap: VoidCallback}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
@@ -86,9 +106,8 @@ class _AppDrawerState extends State<AppDrawer> {
                         Text(
                           title,
                           style: TextStyle(
-                            fontSize: 14.0,
-                            fontFamily: "Kiwi",
-                            fontWeight: FontWeight.bold,
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.normal,
                             color: Colors.black,
                           ),
                         ),

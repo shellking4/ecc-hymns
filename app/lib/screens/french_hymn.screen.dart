@@ -1,11 +1,13 @@
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
 import '../database/database.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 
 class FrenchHymnScreen extends StatefulWidget {
   static const String id = 'french_hymn_screen';
+  final String routeName = "CANTIQUES FRANÇAIS";
   final FrHymn? frenchHymnItem;
   FrenchHymnScreen({Key? key, this.frenchHymnItem}) : super(key: key);
 
@@ -18,9 +20,7 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
     Navigator.pop(context);
   }
 
-  String setAppBarTitle() {
-    return "CANTIQUE FRANÇAIS N°${widget.frenchHymnItem!.number}";
-  }
+  get appBarTitle => "CANTIQUE FRANÇAIS N°${widget.frenchHymnItem!.number}";
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,15 @@ class _FrenchHymnScreenState extends State<FrenchHymnScreen> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
         home: BaseScaffold(
-            scaffoldBody: SingleChildScrollView(
+          appBar: MyAppBar(
+            appBarTitle: appBarTitle, 
+            routeName: widget.routeName,
+            portraitLeftValue: 20.2, 
+            portraitRightValue: 45.4, 
+            landscapeLeftvalue: 200.2, 
+            landscapeRightValue: 197.1
+          ),
+          scaffoldBody: SingleChildScrollView(
           child: ListTile(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.center,

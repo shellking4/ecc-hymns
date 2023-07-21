@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:easy_rich_text/easy_rich_text.dart';
 import '../database/database.dart';
 import '../services/hymns.service.dart';
+import '../utilities/app_bar.util.dart';
 
 class HymnsProgramScreen extends StatefulWidget {
   static const String id = 'hymns_program_screen';
+  final String routeName = "PROGRAMMES";
   @override
   _HymnsProgramScreenState createState() => _HymnsProgramScreenState();
 }
@@ -31,12 +33,22 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
     super.initState();
   }
 
+  get appBarTitle => widget.routeName;
+
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
+        appBar: MyAppBar(
+            appBarTitle: appBarTitle,
+            routeName: widget.routeName,
+            portraitLeftValue: 20.2,
+            portraitRightValue: 45.4,
+            landscapeLeftvalue: 200.2,
+            landscapeRightValue: 197.1),
         scaffoldBody: FutureBuilder<List<HymnProgram>>(
             future: _hymnsPrograms,
-            builder: (BuildContext context, AsyncSnapshot<List<HymnProgram>> snapshot) {
+            builder: (BuildContext context,
+                AsyncSnapshot<List<HymnProgram>> snapshot) {
               if (snapshot.hasData) {
                 listOfHymnPrograms = snapshot.data!;
                 return SingleChildScrollView(
@@ -57,7 +69,10 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                                   label: Text(
                                 "DATES",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontFamily: "Kiwi", fontSize: 15.0, fontWeight: FontWeight.bold),
+                                style: TextStyle(
+                                    fontFamily: "Kiwi",
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold),
                               )),
                               DataColumn(
                                 label: EasyRichText(
@@ -182,18 +197,28 @@ class _HymnsProgramScreenState extends State<HymnsProgramScreen> {
                               ))
                             ],
                             rows: listOfHymnPrograms!.map((hymnProgram) {
-                              var index = listOfHymnPrograms!.indexOf(hymnProgram);
+                              var index =
+                                  listOfHymnPrograms!.indexOf(hymnProgram);
                               return DataRow(
-                                  color: MaterialStateProperty.resolveWith<Color>((Set<MaterialState> states) {
-                                    if (states.contains(MaterialState.selected)) {
-                                      return Theme.of(context).colorScheme.primary.withOpacity(0.3);
+                                  color:
+                                      MaterialStateProperty.resolveWith<Color>(
+                                          (Set<MaterialState> states) {
+                                    if (states
+                                        .contains(MaterialState.selected)) {
+                                      return Theme.of(context)
+                                          .colorScheme
+                                          .primary
+                                          .withOpacity(0.3);
                                     }
                                     return Colors.white;
                                   }),
                                   cells: [
                                     DataCell(Text(
                                       hymnProgram.date,
-                                      style: TextStyle(fontFamily: "Kiwi", fontSize: 14.0, fontWeight: FontWeight.bold),
+                                      style: TextStyle(
+                                          fontFamily: "Kiwi",
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.bold),
                                     )),
                                     DataCell(Text(
                                       hymnProgram.firstHymn,

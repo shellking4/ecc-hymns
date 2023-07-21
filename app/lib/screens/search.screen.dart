@@ -3,11 +3,13 @@ import 'package:flappy_search_bar_ns/flappy_search_bar_ns.dart';
 import 'package:flutter/material.dart' hide SearchBar;
 import '../services/hymns.service.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/hymn_item.util.dart';
 
 // ignore: must_be_immutable
 class SearchSreen extends StatefulWidget {
   static String id = "search_screen";
+  final String routeName = "RECHERCHE CANTIQUES";
   final String? previousRoute;
   SearchSreen({Key? key, this.previousRoute}) : super(key: key);
 
@@ -18,7 +20,7 @@ class SearchSreen extends StatefulWidget {
 class _SearchSreenState extends State<SearchSreen> {
   String? msg;
 
-  String setAppBarTitle() {
+  String appBarTitle() {
     if (widget.previousRoute == 'goun_hymns_screen' ||
         widget.previousRoute == 'goun_hymn_screen') {
       return "CANTIQUES GOUN";
@@ -41,6 +43,13 @@ class _SearchSreenState extends State<SearchSreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: MyAppBar(
+          appBarTitle: appBarTitle(),
+          routeName: widget.routeName,
+          portraitLeftValue: 20.2,
+          portraitRightValue: 45.4,
+          landscapeLeftvalue: 200.2,
+          landscapeRightValue: 197.1),
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -50,7 +59,11 @@ class _SearchSreenState extends State<SearchSreen> {
           onSearch: search,
           minimumChars: 1,
           onItemFound: (hymn, int index) {
-            return HymnItem(hymnItem: hymn, reloadHymns: () {}, searching: true,);
+            return HymnItem(
+              hymnItem: hymn,
+              reloadHymns: () {},
+              searching: true,
+            );
           },
           loader: Center(
             child: Text(
@@ -83,7 +96,7 @@ class _SearchSreenState extends State<SearchSreen> {
       msg = "Entrez Un Numero ou Titre de Cantique";
       return [];
     }
-    var contextOfSearch = setAppBarTitle();
+    var contextOfSearch = appBarTitle();
     if (contextOfSearch == "CANTIQUES GOUN") {
       return HymnsService.getGounHymnSearchResults(query);
     }

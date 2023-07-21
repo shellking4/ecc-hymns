@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import '../database/database.dart';
 import '../services/hymns.service.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/base_scaffold.util.dart';
 import '../utilities/hymn_item.util.dart';
 
 class GounHymnsScreen extends StatefulWidget {
   static const String id = 'goun_hymns_screen';
+  final String routeName = "CANTIQUES GOUN";
   GounHymnsScreen({Key? key}) : super(key: key);
 
   @override
@@ -30,9 +32,7 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
     });
   }
 
-  String setAppBarTitle() {
-    return "CANTIQUES GOUN";
-  }
+  get appBarTitle => widget.routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -45,35 +45,43 @@ class _GounHymnsScreenState extends State<GounHymnsScreen> {
         return false;
       },
       child: BaseScaffold(
+          appBar: MyAppBar(
+            appBarTitle: appBarTitle,
+            routeName: widget.routeName,
+            portraitLeftValue: 40.0,
+            portraitRightValue: 45.4,
+            landscapeLeftvalue: 200.2,
+            landscapeRightValue: 197.1),
           scaffoldBody: Stack(
-        children: <Widget>[
-          FutureBuilder<List<GounHymn>>(
-              future: _gounHymns,
-              builder: (BuildContext context, AsyncSnapshot<List<GounHymn>> snapshot) {
-                if (snapshot.hasData) {
-                  listOfGounnHymns = snapshot.data!;
-                  return Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
-                    child: ListView.builder(
-                      itemCount: listOfGounnHymns!.length,
-                      itemBuilder: (context, index) {
-                        return HymnItem(
-                          hymns: listOfGounnHymns,
-                          hymnIndex: index,
-                          reloadHymns: reloadHymns,
-                        );
-                      },
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return SizedBox();
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              })
-        ],
-      )),
+            children: <Widget>[
+              FutureBuilder<List<GounHymn>>(
+                  future: _gounHymns,
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<GounHymn>> snapshot) {
+                    if (snapshot.hasData) {
+                      listOfGounnHymns = snapshot.data!;
+                      return Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(2, 25, 2, 8),
+                        child: ListView.builder(
+                          itemCount: listOfGounnHymns!.length,
+                          itemBuilder: (context, index) {
+                            return HymnItem(
+                              hymns: listOfGounnHymns,
+                              hymnIndex: index,
+                              reloadHymns: reloadHymns,
+                            );
+                          },
+                        ),
+                      );
+                    } else if (snapshot.hasError) {
+                      return SizedBox();
+                    }
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  })
+            ],
+          )),
     );
   }
 }

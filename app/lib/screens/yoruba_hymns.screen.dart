@@ -1,11 +1,13 @@
 import 'package:ecchymns/database/database.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/base_scaffold.util.dart';
 import '../utilities/hymn_item.util.dart';
 
 class YorubaHymnsScreen extends StatefulWidget {
   static const String id = 'yoruba_hymns_screen';
+  final String routeName = "CANTIQUES YORUBA";
   YorubaHymnsScreen({Key? key}) : super(key: key);
 
   @override
@@ -28,14 +30,19 @@ class _YorubaHymnsScreenState extends State<YorubaHymnsScreen> {
     });
   }
 
-  String setAppBarTitle() {
-    return "CANTIQUES YORUBA";
-  }
+  get appBarTitle => widget.routeName;
 
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-        scaffoldBody: Stack(
+      appBar: MyAppBar(
+        appBarTitle: appBarTitle,
+        routeName: widget.routeName,
+        portraitLeftValue: 30.2,
+        portraitRightValue: 45.4,
+        landscapeLeftvalue: 200.2,
+        landscapeRightValue: 197.1),
+      scaffoldBody: Stack(
       children: <Widget>[
         FutureBuilder<List<YrHymn>>(
             future: _yorubaHymns,

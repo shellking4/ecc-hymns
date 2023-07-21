@@ -1,4 +1,3 @@
-import 'package:ecchymns/screens/layout.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 import 'package:unorm_dart/unorm_dart.dart' as unorm;
@@ -74,11 +73,7 @@ routeToScreenFromDrawer(BuildContext context, Widget screen) {
   Navigator.pop(context);
   PersistentNavBarNavigator.pushNewScreen(
     context,
-    screen: (screen is LayoutScreen)
-        ? screen
-        : LayoutScreen(
-            initialScreen: screen,
-          ),
+    screen: screen,
     withNavBar: true,
     pageTransitionAnimation: PageTransitionAnimation.cupertino,
   );

@@ -4,10 +4,12 @@ import 'package:ecchymns/screens/hymns_program.screen.dart';
 import 'package:ecchymns/screens/yoruba_hymns.screen.dart';
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/home_menu_item.util.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String id = 'home_screen';
+  final String routeName = "ECC CANTIQUES";
   const HomeScreen({super.key});
 
   @override
@@ -17,9 +19,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
-  String setAppBarTitle() {
-    return "ACCUEIL";
-  }
+  get appBarTitle => widget.routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
           return false;
         },
         child: BaseScaffold(
+          appBar: MyAppBar(
+            appBarTitle: appBarTitle, 
+            routeName: widget.routeName,
+            portraitLeftValue: 60.2, 
+            portraitRightValue: 45.4, 
+            landscapeLeftvalue: 200.2, 
+            landscapeRightValue: 197.1
+          ),
           scaffoldBody: SafeArea(
             top: true,
             child: Stack(

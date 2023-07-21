@@ -1,11 +1,13 @@
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
 import '../services/hymns.service.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/constants.util.dart';
 import '../utilities/favorite.item.util.dart';
 
 class FavoritesScreen extends StatefulWidget {
   static const String id = 'favorites_screen';
+  final String routeName = "FAVORIS";
   const FavoritesScreen({super.key});
 
   @override
@@ -30,9 +32,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     });
   }
 
-  String setAppBarTitle() {
-    return "FAVORIS";
-  }
+  get appBarTitle => widget.routeName;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +45,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           return false;
         },
         child: BaseScaffold(
+          appBar: MyAppBar(
+            appBarTitle: appBarTitle, 
+            routeName: widget.routeName,
+            portraitLeftValue: 70.2, 
+            portraitRightValue: 45.4, 
+            landscapeLeftvalue: 200.2, 
+            landscapeRightValue: 197.1
+          ),
           scaffoldBody: SafeArea(
             top: true,
             child: Stack(

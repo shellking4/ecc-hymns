@@ -1,11 +1,13 @@
 import 'package:ecchymns/utilities/base_scaffold.util.dart';
 import 'package:flutter/material.dart';
 import '../database/database.dart';
+import '../utilities/app_bar.util.dart';
 import '../utilities/button.util.dart';
 import '../utilities/constants.util.dart';
 
 class YorubaHymnScreen extends StatefulWidget {
   static const String id = 'yoruba_hymn_screen';
+  final String routeName = "CANTIQUES YORUBA";
   final YrHymn? yorubaHymnItem;
   YorubaHymnScreen({Key? key, this.yorubaHymnItem}) : super(key: key);
 
@@ -18,17 +20,23 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
     Navigator.pop(context);
   }
 
-  String setAppBarTitle() {
-    return "CANTIQUE YORUBA N°${widget.yorubaHymnItem!.number}";
-  }
+  get appBarTitle => "CANTIQUE YORUBA N°${widget.yorubaHymnItem!.number}";
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
+        theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white, primaryColor: themeColor1),
         home: BaseScaffold(
-            scaffoldBody: SingleChildScrollView(
+          appBar: MyAppBar(
+            appBarTitle: appBarTitle,
+            routeName: widget.routeName,
+            portraitLeftValue: 20.2,
+            portraitRightValue: 45.4,
+            landscapeLeftvalue: 200.2,
+            landscapeRightValue: 197.1),
+          scaffoldBody: SingleChildScrollView(
           child: ListTile(
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,7 +55,10 @@ class _YorubaHymnScreenState extends State<YorubaHymnScreen> {
                 ),
                 SizedBox(height: 20.0),
                 Text(widget.yorubaHymnItem!.content,
-                    style: TextStyle(fontFamily: "Kiwi", fontSize: 16.0, color: Colors.black)),
+                    style: TextStyle(
+                        fontFamily: "Kiwi",
+                        fontSize: 16.0,
+                        color: Colors.black)),
                 SizedBox(height: 300.0),
                 RoundedButton(
                     color: themeColor1,
